@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: rd
+# key: rd
+# group: math
+# condition: (and (texmathp) 'auto)
+# `(backward-delete-char 1)`^{($1)}
+# --
+^{($1)}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ket
+# key: ket
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\ket{$0}

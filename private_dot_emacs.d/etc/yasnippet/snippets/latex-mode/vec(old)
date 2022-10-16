@@ -1,0 +1,6 @@
+# key: vec(old)
+# name: vec(old)
+# expand-env: ((argument 't))
+# condition: (and (texmathp) 'auto)
+# --
+`(condition-case nil (progn (backward-sexp) (kill-sexp) (delete-char 1)) (error (setq argument 'nil)))`\\vec{`(if argument (current-kill 0))`}$0

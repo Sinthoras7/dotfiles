@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dddy
+# key: dddy
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\dd[3]{y}

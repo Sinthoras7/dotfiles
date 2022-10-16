@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: includegraphics
+# key: ig
+# --
+\includegraphics[width=${4:\linewidth}]{`(call-interactively 'cdlatex-insert-filename)`}

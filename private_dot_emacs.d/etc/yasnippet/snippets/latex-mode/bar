@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: bar
+# key: bar
+# condition: (and (texmathp) 'auto)
+# expand-env: ((argument (quote t)))
+# group: math
+# type: command
+# `(condition-case nil (progn (backward-sexp) (kill-sexp) (delete-char 1)) (error (setq argument 'nil)))`\\bar{`(if argument (current-kill 0))`}$0
+# --
+(call-interactively #'lb-bar)

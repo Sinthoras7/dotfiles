@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: d to the 3
+# key: dddd
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\dd[3]{$1}

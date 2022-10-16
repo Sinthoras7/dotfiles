@@ -1,0 +1,9 @@
+# key: dm
+# name: Display Math
+# condition: (and (not (texmathp)) (quote auto))
+# group: math
+# `(cdlatex-environment "equation")`
+# --
+\begin{equation}
+`(save-excursion (previous-line)(make-string (current-indentation) ?\s))`$0
+\end{equation}

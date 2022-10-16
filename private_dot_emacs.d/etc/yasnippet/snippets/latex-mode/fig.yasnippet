@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# key : fig
+# group: environments
+# name : \begin{figure} ... \end{figure}
+# --
+\begin{figure}[${1:htbp}]
+  \centering \includegraphics[width=${4:\linewidth}]{`(call-interactively 'cdlatex-insert-filename)`}
+  \caption{${2:caption}}
+  \label{${3:"waiting for reftex-label call..."$(unless yas/modified-p (reftex-label nil 'dont-insert))}}
+\end{figure}

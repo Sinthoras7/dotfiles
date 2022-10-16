@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: theta
+# key: theta
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\theta

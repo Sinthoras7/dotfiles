@@ -1,0 +1,5 @@
+# key: pi
+# name: pi
+# condition: (and (texmathp) 'auto)
+# --
+\\pi

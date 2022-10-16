@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: circ
+# key: circ
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\circ

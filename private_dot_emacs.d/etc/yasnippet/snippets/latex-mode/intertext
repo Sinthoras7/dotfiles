@@ -1,0 +1,6 @@
+# key: intert
+# name: intertext
+# condition: (and (texmathp) 'auto)
+# --
+\\intertext{$1}
+$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: laplacian
+# key: lapla
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\laplacian

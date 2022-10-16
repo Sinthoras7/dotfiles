@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# contributor : Mads D. Kristensen <madsdk@gmail.com>
+# key: table
+# group: environments
+# name : \begin{table} ... \end{table}
+# --
+\begin{table}[${1:htbp}]
+  \centering
+  \begin{tabular}{${4:format}}
+    $0
+  \end{tabular}
+  \caption{${2:caption}}
+  \label{${3:"waiting for reftex-label call..."$(unless yas/modified-p (reftex-label nil 'dont-insert))}}
+\end{table}

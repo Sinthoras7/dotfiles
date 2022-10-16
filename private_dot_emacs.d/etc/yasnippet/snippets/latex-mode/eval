@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: eval
+# key: eval
+# condition: (and (texmathp) 'auto)
+# group: math
+# --
+`(delete-backward-char 1)`\\eval_{$1} $0

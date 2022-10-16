@@ -1,0 +1,8 @@
+# type: command
+# key: doo
+# name: dot
+# expand-env: ((argument 't))
+# condition: (and (texmathp) 'auto)
+# --
+(progn
+  (call-interactively #'lb-dot))

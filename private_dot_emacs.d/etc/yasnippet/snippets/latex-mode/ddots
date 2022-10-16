@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# key: ddot
+# name: ddot
+# expand-env: ((argument 't))
+# condition: (and (texmathp) 'auto)
+# group: math
+# type: command
+# `(condition-case nil (progn (backward-sexp) (kill-sexp) (delete-char 1)) (error (setq argument 'nil)))`\\ddot{`(if argument (current-kill 0))`}$0
+# --
+(call-interactively #'lb-ddot)
