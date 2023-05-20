@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mu
+# key: µ
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝜇

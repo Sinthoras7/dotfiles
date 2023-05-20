@@ -1,0 +1,10 @@
+# key: tabx
+# name: tabularx
+# --
+\\begin{tabularx}{\linewidth}{$1}
+\\toprule
+$2 \\\\
+\\midrule
+
+\\\\ \\bottomrule
+\end{tabularx}

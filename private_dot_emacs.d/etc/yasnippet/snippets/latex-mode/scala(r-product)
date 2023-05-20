@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: scal(ar-product)
+# key: scal
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+⟨$1⟩

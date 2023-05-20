@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: alpha(outside)
+# key: æ
+# condition:  (and (not (texmathp)) (quote auto))
+# --
+\\(𝛼\\)

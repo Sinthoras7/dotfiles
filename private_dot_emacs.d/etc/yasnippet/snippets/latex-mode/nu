@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: nu
+# key: ”
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝜈

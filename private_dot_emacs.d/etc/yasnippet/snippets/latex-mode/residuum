@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: residuum
+# key: res
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+ℛ

@@ -1,0 +1,5 @@
+# key: ł
+# name: lambda(outside)
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(𝜆\\)

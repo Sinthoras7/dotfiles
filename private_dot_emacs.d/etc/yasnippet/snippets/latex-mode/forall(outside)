@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: forall(outside)
+# key: AA
+# condition:  (and (not (texmathp)) (quote auto))
+# --
+\\(∀\\)

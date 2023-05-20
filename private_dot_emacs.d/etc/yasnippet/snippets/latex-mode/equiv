@@ -3,4 +3,4 @@
 # key: eqv
 # condition: (and (texmathp) 'auto)
 # --
-\\equiv$0
+≡

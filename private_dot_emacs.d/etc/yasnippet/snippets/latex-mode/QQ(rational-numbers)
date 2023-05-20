@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: QQ(rational-numbers)
+# key: QQ
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+ℚ

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Sigma
+# key: ẞ
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝛴

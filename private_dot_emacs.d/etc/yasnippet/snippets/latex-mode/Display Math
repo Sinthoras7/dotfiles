@@ -1,9 +1,12 @@
 # key: dm
 # name: Display Math
-# condition: (and (not (texmathp)) (quote auto))
+# condition: (not (texmathp))
 # group: math
+# (and (not (texmathp)) (quote auto))
 # `(cdlatex-environment "equation")`
+#  \label{${1:"waiting for reftex-label call..."$(unless yas/modified-p (reftex-label nil 'dont-insert))}}
 # --
-\begin{equation}
-`(save-excursion (previous-line)(make-string (current-indentation) ?\s))`$0
-\end{equation}
+\begin{equation*}
+ `(save-excursion (previous-line)(make-string (current-indentation) ?\s))`$1
+\end{equation*}
+$0

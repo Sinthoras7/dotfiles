@@ -4,4 +4,4 @@
 # condition: (and (texmathp) 'auto)
 # group: math
 # --
-`(delete-backward-char 1)`\\eval_{$1} $0
+\\eval_{$1} $0

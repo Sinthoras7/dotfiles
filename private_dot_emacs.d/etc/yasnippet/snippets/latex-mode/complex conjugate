@@ -4,4 +4,4 @@
 # condition: (and (texmathp) 'auto)
 # group: math
 # --
-`(delete-backward-char 1)`^{\\star}$0
+\\conj $0

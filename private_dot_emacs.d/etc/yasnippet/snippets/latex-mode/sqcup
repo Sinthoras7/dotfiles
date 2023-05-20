@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: sqcup
+# key: sqcap
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+⊔

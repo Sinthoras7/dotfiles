@@ -1,0 +1,5 @@
+# key: rhdown
+# name: rightharpoondown
+# condition: (and (texmathp) 'auto)
+# --
+⇁ $0

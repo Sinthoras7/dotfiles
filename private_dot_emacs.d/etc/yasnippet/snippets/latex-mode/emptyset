@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: emptyset
+# key: emptyset
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+∅

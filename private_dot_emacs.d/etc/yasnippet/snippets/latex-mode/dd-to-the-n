@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dd-to-the-n
+# key: dnd
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\dd[${1:n}]{${2:x}}$0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: exists-EE-outside
+# key: EE
+# group: math
+# condition: (and (not (texmathp)) (quote auto))
+# --
+\\(∃\\)

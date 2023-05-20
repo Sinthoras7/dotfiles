@@ -1,0 +1,8 @@
+# key: rems
+# name: remarks
+# --
+\begin{remarks}{$1}{}
+\begin{${2:$$(yas/choose-value '("itemize" "enumerate"))}}
+\item $0
+\end{$2}
+\end{remarks}

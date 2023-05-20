@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathcal{L}
+# key: LL
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+ℒ

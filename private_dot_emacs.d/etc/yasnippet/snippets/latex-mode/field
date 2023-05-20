@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: field
+# key: fff
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝔽

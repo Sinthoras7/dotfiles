@@ -1,0 +1,6 @@
+# key: theo
+# name: theorem
+# --
+\begin{theorem}{$1}{$2}
+$0
+\end{theorem}

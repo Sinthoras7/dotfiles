@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: rightsquigarrow
+# key: rsquig
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+⇝

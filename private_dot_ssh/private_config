@@ -1,0 +1,32 @@
+Host sucopra-meggie
+     User scvl103h
+     Hostname meggie.rrze.fau.de
+     IdentityFile ~/Sync/Uni/einzelneSemester/6-semester-fau/Super-Computing-Praktikum/hpc-account-2023-04-11
+
+Host ausserhalb-sucopra-meggie
+     User scvl103h
+     Hostname cshpc.rrze.fau.de
+     ProxyCommand ssh -l oj06iloj cshpc.rrze.fau.de -W %h:%p
+     IdentityFile ~/Sync/Uni/einzelneSemester/6-semester-fau/Super-Computing-Praktikum/hpc-account-2023-04-11
+
+Host informatik-cs3
+     User oj06iloj
+     Hostname cs3-login.informatik.uni-erlangen.de
+     IdentityFile ~/Sync/Uni/einzelneSemester/6-semester-fau/Super-Computing-Praktikum/ssh-keys/cs3-login
+
+Host linux-aufgabe-n0
+     User root
+     Hostname pc-T4-N0
+     IdentityFile ~/Sync/Uni/einzelneSemester/6-semester-fau/Super-Computing-Praktikum/ssh-keys/sucopra-linux-aufgabe
+     ProxyJump informatik-cs3
+     
+Host linux-aufgabe-n1
+     User root
+     Hostname pc-T4-N1
+     IdentityFile ~/Sync/Uni/einzelneSemester/6-semester-fau/Super-Computing-Praktikum/ssh-keys/sucopra-linux-aufgabe
+     ProxyJump informatik-cs3    
+
+Host sucopra-alex
+     User scvl103h
+     Hostname alex.nhr.fau.de
+     IdentityFile ~/Sync/Uni/einzelneSemester/6-semester-fau/Super-Computing-Praktikum/hpc-account-2023-04-11

@@ -1,6 +1,6 @@
 # name: supremum
 # key: sup
-# condition: (and (texmathp) 'auto)
+# condition: (texmathp)
 # group: math
 # --
-\\sup_{$1 \\in $2} $0
+\\sup_{$1 ∈ $2} $0

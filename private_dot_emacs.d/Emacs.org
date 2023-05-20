@@ -7,35 +7,42 @@ When building this on a new system, one must:
 1. Make sure the font fira code is installed (Debian based distros: sudo apt install font-firacode)
 2. Run the command: M-x all-the-icons-install-fonts
 3. See Emacs-Client
+4. See IDE
+5. See Spell-Checking: jinx.el
 
 For Everything Latex-related to Work as expected:
-4. Set the variable "TeX-engine" to "luatex" via the customize-variable-command
-5. Activate searching between pdf and tex code via 'M-x customize-group RET TeX-view RET' and setting it to 'TeX-source-correlate-mode'
-6. Install aspell dictionaries for languages of choice (Ubuntu: 'sudo apt install aspell-de')
+5. Set the variable "TeX-engine" to "luatex" via the customize-variable-command
+6. Activate searching between pdf and tex code via 'M-x customize-group RET TeX-view RET' and setting it to 'TeX-source-correlate-mode'
+7. Install aspell dictionaries for languages of choice (Ubuntu: 'sudo apt install aspell-de').
 
 
 If errors after package-updating: https://emacs.stackexchange.com/questions/72655/after-updating-my-packages-two-packages-are-not-working-anymore-how-to-solve-t
 
 * Early Init
 #+begin_src emacs-lisp
-;; Set the garbage collector to a high number to improve startup performance, later reset by 'gchm'
-  (setq gc-cons-threshold most-positive-fixnum)
+  ;; -*- lexical-binding: t; -*-
+  ;; This lexical binding is important for the custom function my/org-roam-filter-by-tag. I have no idea what it does
 
-  ;; Inhibit unnecessary redisplays during startups
-  (setq-default inhibit-redisplay t
-		inhibit-message t)
-  (add-hook 'window-setup-hook
-	    (lambda ()
-	      (setq-default inhibit-redisplay nil
-			    inhibit-message nil)
-	      (redisplay)))
 
-  ;; Disable startup screen
-  (setq inhibit-startup-screen t)
-  (setq inhibit-startup-echo-area-message t)
-  (setq inhibit-startup-message t)
 
-  
+    ;; Set the garbage collector to a high number to improve startup performance, later reset by 'gchm'
+        (setq gc-cons-threshold most-positive-fixnum)
+
+        ;; Inhibit unnecessary redisplays during startups
+        (setq-default inhibit-redisplay t
+          inhibit-message t)
+        (add-hook 'window-setup-hook
+            (lambda ()
+              (setq-default inhibit-redisplay nil
+                inhibit-message nil)
+              (redisplay)))
+
+        ;; Disable startup screen
+        (setq inhibit-startup-screen t)
+        (setq inhibit-startup-echo-area-message t)
+        (setq inhibit-startup-message t)
+
+
 #+end_src
 
 * Font Size
@@ -78,6 +85,12 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
 #+end_src
 
 ** Straight
+Disable package to load packages to shorten startup time.
+#+begin_src emacs-lisp
+(setq package-enable-at-startup nil)
+
+#+end_src
+
 *** Installation
 #+begin_src emacs-lisp
 (defvar bootstrap-version)
@@ -94,8 +107,6 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
   (load bootstrap-file nil 'nomessage))
 #+end_src
 
-#+RESULTS:
-: t
 
 *** Integration with use-package
 #+begin_src emacs-lisp
@@ -105,7 +116,8 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
 
 #+end_src
 
-* Dashboard
+* Dashboard/Start-Maximised
+** Dashboard
 #+begin_src emacs-lisp
   (use-package dashboard
    ; :if (< (length command-line-args) 2)
@@ -120,7 +132,7 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
   (setq dashboard-center-content t)
   (setq dashboard-set-init-info t)
 
-  (setq dashboard-items '((recents  . 5)
+  (setq dashboard-items '((recents  . 10)
                           (bookmarks . 5)
                           ;(projects . 0)
                           ;(agenda . 0)
@@ -135,6 +147,15 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
                                    )
   )
 #+end_src
+
+** Start Emacs Maximised
+#+begin_src emacs-lisp
+
+  (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(fullscreen . fullheight))
+
+  #+end_src
+
 * Start-Time Optimization
 ** Getting Information
 *** Printing out Startup-Time
@@ -231,17 +252,32 @@ Seemingly on Windows there are some errors without this
 #+end_src
 ** Improved Scrolling
 #+begin_src emacs-lisp
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-(setq scroll-step 1) ;; keyboard scroll one line at a time
+;; (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+#+end_src
+
+#+begin_src emacs-lisp
+;; Make scrolling less stuttered
+(setq auto-window-vscroll nil)
+(customize-set-variable 'fast-but-imprecise-scrolling t)
+(customize-set-variable 'scroll-conservatively 101)
+(customize-set-variable 'scroll-margin 0)
+(customize-set-variable 'scroll-preserve-screen-position t)
+#+end_src
+
+Experimentell: Smooth Scrolling
+#+begin_src emacs-lisp
+(use-package good-scroll)
+  (good-scroll-mode 1)
 #+end_src
 ** Disable some warnings
 #+begin_src emacs-lisp
 
 ;;Don't warn for large files (shows up when launching videos)
-(setq large-file-warnieng-threshold nil)
+(setq large-file-warning-threshold nil)
 
 ;;Don't warn for following symlinked files
 (setq vc-follow-symlinks t)
@@ -274,6 +310,54 @@ Seemingly on Windows there are some errors without this
   (global-set-key [remap scroll-down-command] 'golden-ratio-scroll-screen-down)
   (global-set-key [remap scroll-up-command] 'golden-ratio-scroll-screen-up)
 #+end_src
+
+** Better Support for files with long lines
+#+begin_src emacs-lisp
+;; Better support for files with long lines
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq-default bidi-inhibit-bpa t)
+(global-so-long-mode 1)
+#+end_src
+
+** Savehist
+#+begin_src emacs-lisp
+      (use-package savehist
+        :init (savehist-mode))
+#+end_src
+
+** DWIM commands
+DWIM means "Do-What-I-Mean
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
+#+end_src
+
+** Evil nerd commenter
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 20:21]
+:END:
+#+begin_src emacs-lisp
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+#+end_src
+
+** Window divider
+:PROPERTIES:
+:CREATED: [2023-05-20 Sa 19:55]
+:END:
+Comes from  https://github.com/KaratasFurkan/.emacs.d
+
+To be hones I don't know what this does, but I have found it on the linked site and thought why not.
+
+#+begin_src emacs-lisp
+(setq window-divider-default-places t
+      window-divider-default-bottom-width 1
+      window-divider-default-right-width 1)
+
+(window-divider-mode)
+#+end_src
 * Basic UI Configuration
 
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
@@ -289,7 +373,7 @@ This section configures basic UI settings that remove unneeded elements to make 
   (global-visual-line-mode 1)  ; Proper line wrapping
   (set-fringe-mode '(0 . 0))   ; Disable fringe because I use visual-line-mode
 
-  ;(menu-bar-mode -1)           ; Disable the menu bar
+  (menu-bar-mode -1)           ; Disable the menu bar
  
   (use-package beacon)
   (beacon-mode 1)
@@ -379,7 +463,109 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 ;; Make ESC quit prompts
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 #+end_src
+* Evil-Mode
+:PROPERTIES:
+:CREATED: [2023-04-24 Mo 20:12]
+:END:
 
+#+begin_src emacs-lisp
+
+  (customize-set-variable 'evil-want-keybinding nil)
+
+  (use-package evil)
+  (use-package evil-collection)
+
+
+  (when ( < emacs-major-version 28)
+   (use-package undo-tree)
+   (global-undo-tree-mode)
+  )
+
+
+
+  (customize-set-variable 'evil-want-integration t)
+  (customize-set-variable 'evil-want-C-i-jump nil)
+  (customize-set-variable 'evil-respect-visual-line-mode t)
+  ;; C-h is backspace in insert state
+  (customize-set-variable 'evil-want-C-h-delete t)
+  (if (< emacs-major-version 28)
+    (customize-set-variable 'evil-undo-system 'undo-tree)
+    (customize-set-variable 'evil-undo-system 'undo-redo)
+  )
+
+
+
+    (customize-set-variable 'evil-want-C-i-jump t)
+;;  (customize-set-variable 'evil-want-Y-yank-to-eol nil)
+    (customize-set-variable 'evil-want-fine-undo t)
+
+#+end_src
+
+#+begin_src emacs-lisp
+
+    ;; Load Evil and enable it globally
+    ;; (require 'evil)
+    (evil-mode 1)
+
+
+    ;; Make evil search more like vim
+    (evil-select-search-module 'evil-search-module 'evil-search)
+    (customize-set-variable 'evil-want-C-u-scroll t)
+    ;; Make C-g revert to normal state
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+
+
+    ;; Rebind `universal-argument' to 'C-M-u' since 'C-u' now scrolls the buffer
+  (global-set-key (kbd "C-M-u") 'universal-argument)
+
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+
+
+#+end_src
+
+#+begin_src emacs-lisp
+  (defun crafted-evil/discourage-arrow-keys ()
+    (interactive)
+    (message "Use HJKL keys instead!"))
+
+
+  ;; Disable arrow keys in normal and visual modes
+    (define-key evil-normal-state-map (kbd "<left>") 'crafted-evil/discourage-arrow-keys)
+    (define-key evil-normal-state-map (kbd "<right>") 'crafted-evil/discourage-arrow-keys)
+    (define-key evil-normal-state-map (kbd "<down>") 'crafted-evil/discourage-arrow-keys)
+    (define-key evil-normal-state-map (kbd "<up>") 'crafted-evil/discourage-arrow-keys)
+    (evil-global-set-key 'motion (kbd "<left>") 'crafted-evil/discourage-arrow-keys)
+    (evil-global-set-key 'motion (kbd "<right>") 'crafted-evil/discourage-arrow-keys)
+    (evil-global-set-key 'motion (kbd "<down>") 'crafted-evil/discourage-arrow-keys)
+    (evil-global-set-key 'motion (kbd "<up>") 'crafted-evil/discourage-arrow-keys)
+
+
+#+end_src
+
+#+begin_src emacs-lisp
+(dolist (mode '(custom-mode
+                eshell-mode
+                term-mode))
+  (add-to-list 'evil-emacs-state-modes mode))
+
+(evil-collection-init)
+#+end_src
+
+** Goggles: Visual hints when editing
+
+#+begin_src emacs-lisp
+    (use-package evil-goggles
+      :config
+      (evil-goggles-mode)
+      (evil-goggles-use-diff-faces)
+  )
+
+
+  (setq evil-goggles-pulse t) ;; default is to pulse when running in a graphic display
+#+end_src
 * UI Configuration
 ** Command Log Mode
 
@@ -460,97 +646,49 @@ Read this more https://emacs.stackexchange.com/questions/33388/show-the-full-pat
 
 #+end_src
 
-** Ivy and Counsel (disabled)
-
-[[https://oremacs.com/swiper/][Ivy]] is an excellent completion framework for Emacs.  It provides a minimal yet powerful selection menu that appears when you open files, switch buffers, and for many other tasks in Emacs.  Counsel is a customized set of commands to replace `find-file` with `counsel-find-file`, etc which provide useful commands for each of the default completion commands.
-
-[[https://github.com/Yevgnen/ivy-rich][ivy-rich]] adds extra columns to a few of the Counsel commands to provide more information about each item.
-
-#+begin_src emacs-lisp
-
-  ;; (use-package ivy
-  ;;   :diminish
-  ;;   :bind (("C-s" . swiper)
-  ;;          :map ivy-minibuffer-map
-  ;;          ("TAB" . ivy-alt-done)
-  ;;          ("C-l" . ivy-alt-done)
-  ;;          ("C-j" . ivy-next-line)
-  ;;          ("C-k" . ivy-previous-line)
-  ;;          :map ivy-switch-buffer-map
-  ;;          ("C-k" . ivy-previous-line)
-  ;;          ("C-l" . ivy-done)
-  ;;          ("C-d" . ivy-switch-buffer-kill)
-  ;;          :map ivy-reverse-i-search-map
-  ;;          ("C-k" . ivy-previous-line)
-  ;;          ("C-d" . ivy-reverse-i-search-kill))
-  ;;   :config
-  ;;   (ivy-mode 1))
-
-  ;; (use-package ivy-rich
-  ;;   :init
-  ;;   (ivy-rich-mode 1))
-  ;; (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-
-
-  ;; (use-package swiper)
-  ;; (use-package counsel
-  ;;   :diminish
-  ;;   :bind (("C-M-j" . 'counsel-switch-buffer)
-  ;;          ("M-x" . counsel-M-x)
-  ;;          ("C-x b" . counsel-ibuffer)
-  ;;          ("C-x C-f" . counsel-find-file)
-  ;;          :map minibuffer-local-map
-  ;;          ("C-r" . 'counsel-minibuffer-history))
-  ;;   :config
-  ;;   (counsel-mode 1))
-
-  ;;  (use-package ivy-prescient
-  ;;         :after council
-  ;; 	 :custom 
-  ;;         (ivy-prescient-enable-filtering nil)
-  ;;         :config
-  ;;         (prescient-persist-mode 1) 
-  ;;         (ivy-prescient-mode 1)
-  ;;  )
-#+end_src
-
 ** Vertico
 *** Vertico itself
+First a custom function
 #+begin_src emacs-lisp
 
-(defun lb/minibuffer-backward-kill (arg)
-  "When minibuffer is completing a file name delete up to parent folder, otherwise delete a word"
-  (interactive "p")
-  (if minibuffer-completing-file-name
-      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-      (if (string-match-p "/." (minibuffer-contents))
-          (zap-up-to-char (- arg) ?/)
-        (delete-minibuffer-contents))
-      (backward-kill-word arg))
-)
+  (defun lb/minibuffer-backward-kill (arg)
+    "When minibuffer is completing a file name delete up to parent folder, otherwise delete a word
 
+     ARG is the thing being completed in the minibuffer."
+    (interactive "p")
+    (if minibuffer-completing-file-name
+        ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+        (if (string-match-p "/." (minibuffer-contents))
+            (zap-up-to-char (- arg) ?/)
+          (delete-minibuffer-contents))
+        (backward-kill-word arg))
+  )
+#+end_src
 
-(use-package vertico
-   ;:straight '(vertico :host github
-   ;                    :repo "minad/vertico"
-   ;                    :branch "main")
-   ;:ensure t
-   :bind (;:map vertico-map
-         ;("C-j" . vertico-next)
-         ;("C-k" . vertico-previous)
-         ;("C-f" . vertico-exit)
-         :map minibuffer-local-map
-         ("M-h" . lb/minibuffer-backward-kill)) ;"<Backspace>"
-   :custom
-   (vertico-cycle t)
-   ;:custom-face
-   ;(vertico-current ((t (:background "#3a3f5a"))))
-   :init 
-   (vertico-mode)
-)
+Then the package itself
+#+begin_src emacs-lisp
+    ;; Just needed if straight is used, otherwise delete or comment it
+    (add-to-list 'load-path
+                (expand-file-name "straight/build/vertico/extensions"
+                                 straight-base-dir))
 
-(use-package savehist
-    :init (savehist-mode))
+  ;; Here the real deal begins
+      (use-package vertico
+         :bind (
+                  :map minibuffer-local-map
+                  ("M-h" . lb/minibuffer-backward-kill)) ;"<Backspace>"
+         :custom
+         (vertico-cycle t)
+         :init
+         (vertico-mode)
+      )
+
+    (with-eval-after-load 'evil
+      (define-key vertico-map (kbd "C-j") 'vertico-next)
+      (define-key vertico-map (kbd "C-k") 'vertico-previous)
+      (define-key vertico-map (kbd "M-h") 'vertico-directory-up))
+
+      (define-key vertico-map (kbd "M-h") 'lb/minibuffer-backward-kill)
 
 #+end_src
 *** Marginalia
@@ -568,6 +706,10 @@ Read this more https://emacs.stackexchange.com/questions/33388/show-the-full-pat
   (use-package consult
          :bind ("C-s" . consult-line))
 
+
+  (define-key minibuffer-local-map (kbd "C-r") 'consult-history)
+
+  (setq completion-in-region-function #'consult-completion-in-region)
 #+end_src
 *** Some more useful customization
 From https://github.com/minad/vertico
@@ -601,33 +743,104 @@ From https://github.com/minad/vertico
 
 *** Orderless
 #+begin_src emacs-lisp
-;; Optionally use the `orderless' completion style.
-(use-package orderless
-  :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion))))
-)
+  ;; Optionally use the `orderless' completion style.
+  (use-package orderless
+    :init
+    ;; Configure a custom style dispatcher (see the Consult wiki)
+    ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+    ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion))))
+  )
 
-(setq completion-styles '(substring orderless basic))
+  ;; Comment the other thing if this kind of completion without substring is not fitting
+  ;;(setq completion-styles '(substring orderless basic))
+  (customize-set-variable 'completion-styles '(orderless basic))
 #+end_src
-*** Corfu (completion in region) (disabled)
+
+*** Embark
+
+Without this dependency, the embark package would not install
+#+begin_src emacs-lisp
+  (use-package compat
+    :straight t)
+#+end_src
+
+#+begin_src emacs-lisp
+   (use-package embark
+     :straight t)
+   (use-package embark-consult
+     :straight t)
+
+   (global-set-key [remap describe-bindings] #'embark-bindings)
+   (global-set-key (kbd "C-.") 'embark-act)
+
+   ;; Use Embark to show bindings in a key prefix with `C-h`
+   (setq prefix-help-command #'embark-prefix-help-command)
+
+   (with-eval-after-load 'embark-consult
+     (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))
+#+end_src
+
+*** Corfu (completion in region)
+#+begin_src emacs-lisp
+    ;; This is needed for straight installation:
+    ;(add-to-list 'load-path
+    ;             (expand-file-name "straight/build/corfu/extensions"
+    ;                               straight-base-dir))
+
+    (use-package corfu
+      :straight (:files (:defaults "extensions/*")))
+
+
+  (unless (display-graphic-p)
+    (require 'corfu-terminal)
+    (corfu-terminal-mode +1))
+
+  ;; Setup corfu for popup like completion
+  (customize-set-variable 'corfu-cycle t) ; Allows cycling through candidates
+  (customize-set-variable 'corfu-auto t)  ; Enable auto completion
+  (customize-set-variable 'corfu-auto-prefix 1) ; Complete with less prefix keys
+  (customize-set-variable 'corfu-auto-delay 0.5) ; No delay for completion
+  (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
+
+  (global-corfu-mode 1)
+  (corfu-popupinfo-mode 1)
+  (eldoc-add-command #'corfu-insert)
+  (define-key corfu-map (kbd "M-p") #'corfu-popupinfo-scroll-down)
+  (define-key corfu-map (kbd "M-n") #'corfu-popupinfo-scroll-up)
+  (define-key corfu-map (kbd "M-d") #'corfu-popupinfo-toggle)
+
+
+  ;; Deactivate Corfu in org and latex files:
+  (add-hook 'org-mode-hook (lambda () (corfu-mode -1)))
+  (add-hook 'LaTeX-mode-hook (lambda () (corfu-mode -1)))
+
+
+#+end_src
+*** Cape (completion at point)
 #+begin_src emacs-lisp
 
-  ;; (use-package corfu
-  ;;   ;:straight '(corfu :host github
-  ;;   ;                  :repo "minad/corfu")
-  ;;   ;:bind (:map corfu-map
-  ;;   ;       ("C-j" . corfu-next)
-  ;;   ;       ("C-k" . corfu-previous)
-  ;;   ;       ("C-f" . corfu-insert))
-  ;;   :custom
-  ;;   (corfu-cycle t)
-  ;;   :config
-  ;;   (corfu-global-mode))
+  ;; Setup Cape for better completion-at-point support and more
+(use-package cape)
+
+;; Add useful defaults completion sources from cape
+(add-to-list 'completion-at-point-functions #'cape-file)
+(add-to-list 'completion-at-point-functions #'cape-dabbrev)
+
+;; Silence the pcomplete capf, no errors or messages!
+;; Important for corfu
+(advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+
+;; Ensure that pcomplete does not write to the buffer
+;; and behaves as a pure `completion-at-point-function'.
+(advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify)
+(add-hook 'eshell-mode-hook
+          (lambda () (setq-local corfu-quit-at-boundary t
+                            corfu-quit-no-match t
+                            corfu-auto nil)
+            (corfu-mode)))
 #+end_src
 ** Helpful Help Commands
 
@@ -635,17 +848,187 @@ From https://github.com/minad/vertico
 
 #+begin_src emacs-lisp
 
-  (use-package helpful
-    ;:custom
-    ;(counsel-describe-function-function #'helpful-callable)
-    ;(counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ([remap describe-function] . helpful-callable) ;counsel-describe-function-function
-    ([remap describe-command] . helpful-command)
-    ([remap describe-variable] . helpful-variable) ;counsel-describe-variable-function
-    ([remap describe-key] . helpful-key))
+    (use-package helpful
+      ;:custom
+      ;(counsel-describe-function-function #'helpful-callable)
+      ;(counsel-describe-variable-function #'helpful-variable)
+      :bind
+      ([remap describe-function] . helpful-callable) ;counsel-describe-function-function
+      ([remap describe-command] . helpful-command)
+      ([remap describe-variable] . helpful-variable) ;counsel-describe-variable-function
+      ([remap describe-symbol] . helpful-symbol)
+      ([remap describe-key] . helpful-key))
+
+
+
+  (global-set-key (kbd "C-h F") #'helpful-function)
+  ;; Bind extra `describe-*' commands
+  (global-set-key (kbd "C-h K") #'describe-keymap)
 
 #+end_src
+* IDE
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 19:30]
+:END:
+
+** Eglot (core in emacs 29)
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 21:13]
+:END:
+
+#+begin_src emacs-lisp
+(use-package eglot)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package eldoc-box
+  :commands (eldoc-box-hover-mode eldoc-box-hover-at-point-mode)
+  :custom
+  (eldoc-box-clear-with-C-g t))
+#+end_src
+
+
+** Languages
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 21:26]
+:END:
+See available language server: https://github.com/joaotavora/eglot
+
+
+*** Bash
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 21:26]
+:END:
+#+begin_src
+dnf install -y nodejs-bash-language-server
+#+end_src
+or not on Fedora:
+#+begin_src
+npm i -g bash-language-server
+#+end_src
+
+*** Latex
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 21:34]
+:END:
+
+Texlab (first Rust):
+https://github.com/latex-lsp/texlab
+
+ltex:
+Anweisungen hier folgen: https://github.com/emacs-languagetool/eglot-ltex
+Für installation das latest release: https://github.com/valentjn/ltex-ls/releases/tag/16.0.0
+
+#+begin_src emacs-lisp
+  ;; (use-package eglot-ltex
+  ;;   :straight
+  ;;   (:host github :repo "emacs-languagetool/eglot-ltex")
+  ;;   :hook (text-mode . (lambda ()
+  ;;                        (require 'eglot-ltex)
+  ;;                        (eglot-ensure)))
+  ;;         (org-mode . (lambda ()
+  ;;                        (require 'eglot-ltex)
+  ;;                        (eglot-ensure)))
+  ;;         (markdown-mode . (lambda ()
+  ;;                        (require 'eglot-ltex)
+  ;;                        (eglot-ensure)))
+  ;;   :init
+  ;;   (setq eglot-languagetool-server-path "~/Sync/Diverses/Programme/ltex-ls-16.0.0-linux-x64/ltex-ls-16.0.0/")
+  ;; )
+#+end_src
+
+*** Python
+#+begin_src
+pip install pyright
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package elpy
+  :init
+  (elpy-enable))
+#+end_src
+
+**Quickstart**
+Once installed, Elpy will automatically provide code completion, syntax error highlighting and code hinting (in the modeline) for python files. Elpy offers a lot of features, but the following keybindings should be enough to get started:
+
+    C-c C-c evaluates the current python script (or region if something is selected) in an interactive python shell. The python shell is automatically displayed aside of your script.
+    C-RET evaluates the current statement (current line plus the following nested lines).
+    C-c C-z switches between your script and the interactive shell.
+    C-c C-d displays documentation for the thing under cursor. The documentation will pop in a different buffer, that can be closed with q.
+
+
+
+** LSP
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 19:38]
+:END:
+#+begin_src emacs-lisp
+
+  ;;   (defun lb/lsp-mode-setup ()
+  ;;   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  ;;   (lsp-headerline-breadcrumb-mode))
+
+  ;; (use-package lsp-mode
+  ;;   :commands (lsp lsp-deferred)
+  ;;   :hook (lsp-mode . lb/lsp-mode-setup)
+  ;;   :init
+  ;;   (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  ;;   :config
+  ;;   (lsp-enable-which-key-integration t))
+
+#+end_src
+
+#+begin_src
+M-x lsp-install-server bash-ls
+#+end_src
+
+
+
+#+begin_src emacs-lisp
+  ;; (use-package lsp-ui
+  ;;   :hook (lsp-mode . lsp-ui-mode)
+  ;;   :custom
+  ;;   (lsp-ui-doc-position 'bottom))
+
+#+end_src
+https://emacs-lsp.github.io/lsp-ui/
+
+
+
+*** Latex:
+
+For Latex synctex:
+#+begin_src
+pip3 install --user https://github.com/efoerster/evince-synctex/archive/master.zip
+#+end_src
+#+begin_src emacs-lisp
+  ;; (setq lsp-latex-forward-search-executable "evince-synctex")
+  ;; (setq lsp-latex-forward-search-args '("-f" "%l" "%p" "\"emacsclient +%l %f\""))
+#+end_src
+
+** Flycheck decided not to do it, at first
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 20:30]
+:END:
+
+#+begin_src emacs-lisp
+  ;; (use-package flycheck
+  ;;   :straight t
+  ;;   :init (global-flycheck-mode))
+#+end_src
+One also needs the tools for the specific languages. I have:
+
+#+begin_src
+pip install pylint
+
+
+#+end_src
+
+
+**
+:PROPERTIES:
+:CREATED: [2023-04-17 Mo 20:40]
+:END:
 
 * Org Mode
 
@@ -658,13 +1041,6 @@ The =lb/org-font-setup= function configures various text faces to tweak the size
 
     (defun lb/org-font-setup ()
 
-      ;; Replace list hyphen with dot
-      ;; (font-lock-add-keywords 'org-mode
-      ;;                         '(("^ *\\([-]\\) "
-      ;;                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-
-    
       ;; Set faces for heading levels
       (dolist (face '((org-level-1 . 1.4)
                       (org-level-2 . 1.3)
@@ -689,65 +1065,214 @@ The =lb/org-font-setup= function configures various text faces to tweak the size
 
 ** Basic Config
 
-This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.  There's a lot to unpack in here so I'd recommend watching the videos for [[https://youtu.be/VcgjTEa0kU4][Part 5]] and [[https://youtu.be/PNE-mgkZ6HM][Part 6]] for a full explanation.
+This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.
 
 #+begin_src emacs-lisp
 
-    (defun lb/org-mode-setup ()
-      (org-indent-mode)
-      (variable-pitch-mode 1)
-      (visual-line-mode 1))
+        (defun lb/org-mode-setup ()
+          (org-indent-mode)
+          (variable-pitch-mode 1)
+          (visual-line-mode 1))
 
-    (use-package org
-      ;:pin org
-      :commands (org-agenda org-capture)
-      :hook (org-mode . lb/org-mode-setup)
-      :config
-      (setq org-ellipsis " ▾")
+        (use-package org
+          :commands (org-agenda org -capture)
+          :hook (org-mode . lb/org-mode-setup)
+          :config
+          (setq org-ellipsis " ▾")
 
-      (define-key global-map (kbd "C-c j")
-        (lambda () (interactive) (org-capture nil "jj")))
-  ; to here is unnecessary, since I don't plan to use it
-      (lb/org-font-setup))
+          ; I could just write them in a list
+          ;(setq org-agenda-files '("~/Sync/ALT-Org/") )
+
+          ;; This would be all files
+          ;; (setq org-agenda-files (directory-files-recursively "~/Sync/Org" "\\.org$"))
+
+
+          ; You can also filter out certain directory from lookup by adding a array filter. Example, filtering out all org files in xxxx/xxx/daily/ directory:
+           (setq org-agenda-files
+            (seq-filter (lambda(x) (not (string-match "/Roam/"(file-name-directory x))))
+             (directory-files-recursively "~/Sync/Org" "\\.org$")
+            )
+           )
+
+          (setq org-agenda-start-with-log-mode t)
+          (setq org-log-done 'time)
+          (setq org-log-into-drawer t)
+
+          (setq org-todo-keywords
+            '((sequence "SOMEDAY(s!)" "WAIT(w!)" "TODO(t!)" "NEXT(n!)" "|" "DONE(d!)" "CANC(c@!)")
+            ;  (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")
+            ;  (sequence "WAIT(w@)" "TODO(t!)" "NEXT(n!)" "|" "DONE(d!)")
+            )
+          )
 
 
 
-  ;(setq org-support-shift-select t)
+
+        ;;(setq org-refile-targets
+        ;; '(("~/Sync/Org/2-scheduled-waiting.org" :maxlevel . 1)
+        ;;   ("~/Sync/Org/2-waiting.org" :maxlevel . 1))
+        ;; )
+
+        ;;(setq org-refile-targets
+        ;; '(("5-archive.org" :maxlevel . 1))
+        ;;)
+
+        (setq org-refile-use-outline-path 'file)
+        (setq org-refile-targets '((org-agenda-files :level . 1)))
+
+
+      ;; Save Org buffers after refiling!
+      (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+      ;(setq org-archive-location '(("~/Sync/Org/5-archive.org" )))
+
+
+      (setq org-archive-location (concat "~/Sync/Org/archive/archive-"
+                                   (format-time-string "%Y-%m" (current-time))
+                                   ".org_archive::"))
+
+
+
+      (setq org-tag-alist
+        '((:startgroup)
+           ; Put mutually exclusive tags here
+           (:endgroup)
+           ("@errand" . ?e)
+           ("@home" . ?h)
+           ("@PC" . ?p)
+           ("@recherche" . ?r)
+           ("@neustadt" . ?n)
+           ("@mail" . ?m)
+           ("@call" . ?c)
+           ("@phone" . ?P)
+           ("@zug" . ?z)
+           ("@uni" . ?u)
+           ("kaufland" . ?k)
+           ("onlineshop" . ?o)
+           ("FSI" . ?f)
+           ("FSV" . ?F)
+           ))
+
+      ;; Configure custom agenda views
+      (setq org-agenda-custom-commands
+       '(
+         ("d" "Dashboard"
+          ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+             ((org-agenda-overriding-header "Next Tasks"))
+            )
+            (tags-todo "agenda/ACTIVE"
+             ((org-agenda-overriding-header "Active Projects"))
+            )
+          ))
+
+        ;; ("n" "Next Tasks"
+        ;;  ((todo "NEXT"
+        ;;     ((org-agenda-overriding-header "Next Tasks"))
+        ;;  ))
+        ;; )
+
+         ;; ("n" "Next actions by tag"
+         ;; (lambda (arg)
+         ;;   (interactive)
+         ;;   (let my-tag (completing-read "Tag: " (mapcar 'car org-tag-alist)))
+         ;;   (org-tags-view nil (format "+%s" my-tag))
+         ;;   (org-agenda-list nil "+TODO=\"NEXT\"")
+         ;;  ))
+
+
+         ;; The next function does not work for some reason... Maybe ask stackexchange
+         ("n" "Next actions by tag"
+         (lambda (arg)
+           (interactive)
+           (setq my-tag (completing-read "Tag: " (mapcar 'car org-tag-alist)))
+
+           (org-ql-block '(and (todo "NEXT")
+                              (tags (format "%s" my-tag))
+                          )
+                        ((org-ql-block-header (format "NEXT tasks, whose tags match: %s" my-tag)))
+                        (agenda)
+           )
+          )
+         )
+
+
+
+        ("z" "Im Zug" tags-todo "@zug"
+            ((org-agenda-overriding-header "Eignet sich für Zugfahrt"))
+         )
+
+        ("N" "In Neustadt"
+         ((org-ql-block '(and (todo "NEXT")
+                              (tags "@neustadt")
+                         )
+                        ((org-ql-block-header "Was in Neustadt dringend getan werden muss"))
+                        (agenda)
+           ))
+         )
+         ("p" "Am PC"
+         ((org-ql-block '(and (todo "NEXT" "TODO" )
+                              (tags "@PC")
+                         )
+                        ((org-ql-block-header "Was am PC getan werden muss"))
+                        (agenda)
+           ))
+         )
+         ("h" "At home"
+         ((org-ql-block '(and (todo "NEXT" "TODO" )
+                              (tags "@home")
+                         )
+                        ((org-ql-block-header "Was am PC getan werden muss"))
+                        (agenda)
+           ))
+         )
+
+
+        )
+      )
+
+
+
+
+
+
+
+      (setq org-capture-templates
+        `(("t" "Tasks / Projects")
+          ("tt" "Task" entry (file "~/Sync/ALT-Org/Inbox.org")
+               "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+          ("j" "Journal Entries")
+          ("jj" "Journal" entry
+               (file+olp+datetree "~/Sync/ALT-Org/Journal.org")
+               "\n* %<%H:%M %p> - Journal :journal:\n\n%?\n\n"
+               ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+               :clock-in :clock-resume
+               :empty-lines 1)
+
+
+         )
+      )
+
+
+
+          (lb/org-font-setup)
+        )
+
+
+
+  ;; Return or left-click with mouse follows link
+  (customize-set-variable 'org-return-follows-link t)
+  (customize-set-variable 'org-mouse-1-follows-link t)
+
+  ;; Display links as the description provided
+  (customize-set-variable 'org-link-descriptive t)
+
+
+      ;(setq org-support-shift-select t)
 
 #+end_src
 
-*** Nicer Heading Bullets
-
-[[https://github.com/sabof/org-bullets][org-bullets]] replaces the heading stars in =org-mode= buffers with nicer looking characters that you can control.  Another option for this is [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]].
-
-#+begin_src emacs-lisp
-
-  (use-package org-bullets
-    :after org
-    :hook (org-mode . org-bullets-mode)
-    :custom
-    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-#+end_src
-
-Here a possible commented Implementation of org-superstar:
-
-#+begin_src emacs-lisp
-
-  ;; (use-package org-superstar)
-  ;; (defun my-auto-lightweight-mode ()
-  ;;   "Start Org Superstar differently depending on the number of lists items."
-  ;;   (let ((list-items
-  ;;          (count-matches "^[ \t]*?\\([+-]\\|[ \t]\\*\\)"
-  ;;                         (point-min) (point-max))))
-  ;;     (unless (< list-items 100)
-  ;;       (org-superstar-toggle-lightweight-lists)))
-  ;;   (org-superstar)))
-
-  ;; (add-hook 'org-mode-hook #'my-auto-lightweight-mode)
-  ;(setq inhibit-compacting-font-caches 1) ;if it get's to slow
-
-#+end_src
 
 *** Center Org Buffers
 
@@ -764,6 +1289,43 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
     :hook (org-mode . lb/org-mode-visual-fill))
 
 #+end_src
+
+*** Nicer looking Org mode
+:PROPERTIES:
+:CREATED: [2023-05-18 Do 21:38]
+:END:
+
+#+begin_src emacs-lisp
+    (use-package org-modern)
+
+    (add-hook 'org-mode-hook #'org-modern-mode)
+    (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+  (setq
+   ;; Edit settings
+   org-auto-align-tags nil
+   org-tags-column 0
+   org-fold-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
+
+   ;; Org styling, hide markup etc.
+   ;; org-hide-emphasis-markers t
+   org-pretty-entities t
+   ;; org-ellipsis "…"
+
+   ;; Agenda styling
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
+
+#+end_src
+
 
 ** Configure Babel Languages
 
@@ -812,14 +1374,256 @@ This snippet adds a hook to =org-mode= buffers so that =lb/org-babel-tangle-conf
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
 
 #+end_src
+
+
 *** Tab in Sourcecode-Blocks
 #+begin_src emacs-lisp
 
   (setq org-src-tab-acts-natively t)
 
 #+end_src
+** Prettyfying Latex-Code
+#+begin_src emacs-lisp
+   (setq org-pretty-entities t)
+#+end_src
+** Add timestamp when creating todos
+#+begin_src emacs-lisp
+;;;; add inactive timestamp to every org-item
+;; https://stackoverflow.com/a/52815573/5115219
+;; https://emacs.stackexchange.com/a/45369/29404
+(defun lb/insert-created-date (&rest ignore)
+  "Insert inacative timestamp property,
+but only in org-items, not in org-item-checkboxes."
+  (interactive)
+  (if (not (org-at-item-checkbox-p))
+      (progn
+        (insert (format-time-string
+                 (concat "\n"
+                         ":PROPERTIES:\n"
+                         ":CREATED: "
+                         "[%Y-%m-%d %a %H:%M]\n"
+                         ":END:"
+                         )))
+        ;; in org-capture, this folds the entry; when inserting a heading, this moves point back to the heading line
+        (org-back-to-heading)
+        ;; when inserting a heading, this moves point to the end of the line
+        (move-end-of-line ()))))
+;;;; add inactive timestamp to  entries in org-mode
+(advice-add 'org-insert-heading :after #'lb/insert-created-date)
+#+end_src
+** Automatical statistics cookies
+:properties:
+:created: [2023-04-05 Mi 22:20]
+:end:
+I tried to use chatGPT, but it did not work...
+** Org-ql
+:properties:
+:created: [2023-04-06 Do 23:09]
+:end:
+#+begin_src emacs-lisp
+   (use-package org-ql
+      :straight t)
+#+end_src
+** Org-archive-done-tasks
+:PROPERTIES:
+:CREATED: [2023-04-09 So 23:51]
+:END:
+From: https://stackoverflow.com/a/27043756
+
+#+begin_src emacs-lisp
+  ;; (defun lb/org-archive-done-tasks-file ()
+  ;;   (interactive)
+  ;;   (org-map-entries
+  ;;    (lambda ()
+  ;;      (org-archive-subtree)
+  ;;      (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+  ;;    "/DONE" 'file))
+
+  ;; (defun lb/org-archive-done-tasks-agenda ()
+  ;;   (interactive)
+  ;;   (org-map-entries
+  ;;    (lambda ()
+  ;;      (org-archive-subtree)
+  ;;      (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+  ;;    "/DONE" 'agenda))
+  ;;
+#+end_src
+
+
+
+From: https://stackoverflow.com/a/70131908/19768284
+
+ found the direct "org-map-entries" method in a couple of these answers to be a little "fragile" for some reason in situations with more varied nesting and TODOs at multiple levels.
+
+This method - generating a list and then archiving in reverse (to avoid changes in positioning) seems to cover every use case I've thrown at it. Sharing it here for anyone else that runs into trouble.
+#+begin_src emacs-lisp
+(defun lb/org-archive-done-tasks-file ()
+  "Archive all tasks marked DONE in the file."
+  (interactive)
+  (mapc (lambda(entry)
+          (goto-char entry)
+          (org-archive-subtree))
+        (reverse (org-map-entries (lambda () (point)) "TODO=\"★ DONE\"" 'file))))
+
+(defun lb/org-archive-done-tasks-agenda ()
+  "Archive all tasks marked DONE in the file."
+  (interactive)
+  (mapc (lambda(entry)
+          (goto-char entry)
+          (org-archive-subtree))
+        (reverse (org-map-entries (lambda () (point)) "TODO=\"★ DONE\"" 'agenda))))
+
+
+#+end_src
+
+* Org-Roam
+** Basic Configuration
+#+begin_src emacs-lisp
+
+    (use-package org-roam
+      ;:straight (:files (:defaults "extensions/*"))
+      :init
+      (setq org-roam-v2-ack t)
+      :custom
+      (org-roam-directory "~/Sync/Org/Roam")
+      (org-roam-completion-everywhere t)
+
+
+      (org-roam-capture-templates
+         '(("d" "default" plain
+            "%?"
+            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+            :unnarrowed t)
+         ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+          :unnarrowed t)
+         )
+      )
+
+
+      :bind (("C-c r l" . org-roam-buffer-toggle)
+             ("C-c r f" . org-roam-node-find)
+             ("C-c r i" . org-roam-node-insert)
+             ("C-c r I" . lb/org-roam-node-insert-immediate)
+             :map org-mode-map
+             ("C-M-i"    . completion-at-point)
+             :map org-roam-dailies-map
+             ("Y" . org-roam-dailies-capture-yesterday)
+             ("T" . org-roam-dailies-capture-tomorrow)
+            )
+      :bind-keymap
+      ("C-c r d" . org-roam-dailies-map)
+      :config
+      (require 'org-roam-dailies)
+      (org-roam-setup)
+    )
+
+
+
+
+
+#+end_src
+
+** Daily Customization:
+#+begin_src emacs-lisp
+    (setq org-roam-dailies-directory "daily/")
+
+    (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry
+           "* %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n"
+                   )
+           )
+         )
+    )
+#+end_src
+
+** Org roam create link immediate:
+#+begin_src emacs-lisp
+(defun lb/org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
+#+end_src
+
+** Org-Agenda-from Roam-notes: (deactivated)
+#+begin_src emacs-lisp
+  (defun lb/org-roam-filter-by-tag (tag-name)
+     (lambda (node)
+       (member tag-name (org-roam-node-tags node))))
+
+  ;; (defun lb/org-roam-list-notes-by-tag (tag-name)
+  ;;   (mapcar #'org-roam-node-file
+  ;;           (seq-filter
+  ;;            (lb/org-roam-filter-by-tag tag-name)
+  ;;            (org-roam-node-list))))
+
+  ;; (defun lb/org-roam-refresh-agenda-list ()
+  ;;   (interactive)
+  ;;   (setq org-agenda-files (lb/org-roam-list-notes-by-tag "Project")))
+
+  ;; ;; Build the agenda list the first time for the session
+  ;; (lb/org-roam-refresh-agenda-list)
+#+end_src
+
+** Capture a task directly into a specific project
+#+begin_src emacs-lisp
+  (defun lb/org-roam-capture-task ()
+     (interactive)
+     ;; Add the project file to the agenda after capture is finished
+     (add-hook 'org-capture-after-finalize-hook #'lb/org-roam-project-finalize-hook)
+
+     ;; Capture the new task, creating the project file if necessary
+     (org-roam-capture- :node (org-roam-node-read
+                               nil
+                               (lb/org-roam-filter-by-tag "Project"))
+                        :templates '(("p" "project" plain "* TODO %?"
+                                      :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                             "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
+                                                             ("Tasks"))))))
+
+   (global-set-key (kbd "C-c r/home/leonb/.emacs.d/Emacs.org t") #'lb/org-roam-capture-task)
+#+end_src
+
+** Automatically copy (or move) completed tasks to dailies
+
+One interesting use for daily files is to keep a log of tasks that were completed on that particular day. What if we could automatically copy completed tasks in any Org Mode file to today's daily file?
+
+We can do this by adding some custom code!
+
+The following snippet sets up a hook for all Org task state changes and then copies the completed (DONE) entry to today's note file:
+
+#+begin_src emacs-lisp
+(defun my/org-roam-copy-todo-to-today ()
+  (interactive)
+  (let ((org-refile-keep t) ;; Set this to nil to delete the original!
+        (org-roam-dailies-capture-templates
+          '(("t" "tasks" entry "%?"
+             :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
+        (org-after-refile-insert-hook #'save-buffer)
+        today-file
+        pos)
+    (save-window-excursion
+      (org-roam-dailies--capture (current-time) t)
+      (setq today-file (buffer-file-name))
+      (setq pos (point)))
+
+    ;; Only refile if the target file is different than the current file
+    (unless (equal (file-truename today-file)
+                   (file-truename (buffer-file-name)))
+      (org-refile nil nil (list "Tasks" today-file nil pos)))))
+
+(add-to-list 'org-after-todo-state-change-hook
+             (lambda ()
+               (when (equal org-state "DONE")
+                 (my/org-roam-copy-todo-to-today))))
+#+end_src
+
 * Development
-** Projectile (Disabled)
+** Projectile (Disabled) Maybe project.el instead?
 
 [[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
 
@@ -886,9 +1690,8 @@ This snippet adds a hook to =org-mode= buffers so that =lb/org-babel-tangle-conf
     ("\\.tex\\'" . latex-mode) ; Must first activate the inferior Emacs latex mode
     :hook
             (LaTeX-mode . TeX-PDF-mode)
-            (LaTeX-mode . company-mode)
             (LaTeX-mode . flyspell-mode)
-            (LaTeX-mode . flycheck-mode)
+    ;       (LaTeX-mode . flycheck-mode)
             (LaTeX-mode . LaTeX-math-mode)
             (LaTeX-mode . turn-on-reftex)
             (LaTeX-mode . turn-on-cdlatex)
@@ -917,41 +1720,43 @@ This snippet adds a hook to =org-mode= buffers so that =lb/org-babel-tangle-conf
 
 
 #+begin_src emacs-lisp
-   (setq TeX-data-directory (straight--repos-dir "auctex")
-          TeX-lisp-directory TeX-data-directory
+  (setq-default TeX-master nil)
 
-          ; Or custom-set-variables as follows.
-          ; M-x describe-variable RET preview-TeX-style-dir RET
-          ;`(preview-TeX-style-dir ,(concat ".:" (straight--repos-dir "auctex") "latex:"))
-          preview-TeX-style-dir (concat ".:" (straight--repos-dir "auctex") "latex:")
+  (setq TeX-data-directory (straight--repos-dir "auctex")
+              TeX-lisp-directory TeX-data-directory
 
-          TeX-parse-self t ; parse on load
-          TeX-auto-save t  ; parse on save
+              ; Or custom-set-variables as follows.
+              ; M-x describe-variable RET preview-TeX-style-dir RET
+              ;`(preview-TeX-style-dir ,(concat ".:" (straight--repos-dir "auctex") "latex:"))
+              preview-TeX-style-dir (concat ".:" (straight--repos-dir "auctex") "latex:")
 
-        ;Type of TeX engine to use.
-        ;It should be one of the following symbols:
-        ;* ‘default’
-        ;* ‘luatex’
-        ;* ‘omega’
-        ;* ‘xetex’
-          TeX-engine 'luatex
-          TeX-auto-local ".auctex-auto" ; Directory containing automatically generated TeX information.
-          TeX-style-local ".auctex-style" ; Directory containing hand generated TeX information.
+              TeX-parse-self t ; parse on load
+              TeX-auto-save t  ; parse on save
 
-        ;; ##### Enable synctex correlation.
-        ;; ##### From Okular just press `Shift + Left click' to go to the good line.
-        ;; ##### From Evince just press `Ctrl + Left click' to go to the good line.
-          TeX-source-correlate-mode t
-          TeX-source-correlate-method 'synctex
-          TeX-source-correlate-start-server t
-          TeX-view-evince-keep-focus t
-        ;; automatically insert braces after sub/superscript in math mode
-        ;;  TeX-electric-sub-and-superscript t ; Deactivated since cdlatex does the same thing better
-        ;; If non-nil, then query the user before saving each file with TeX-save-document.
-          TeX-save-query nil
+            ;Type of TeX engine to use.
+            ;It should be one of the following symbols:
+            ;* ‘default’
+            ;* ‘luatex’
+            ;* ‘omega’
+            ;* ‘xetex’
+              TeX-engine 'luatex
+              TeX-auto-local ".auctex-auto" ; Directory containing automatically generated TeX information.
+              TeX-style-local ".auctex-style" ; Directory containing hand generated TeX information.
+              bibtex-dialect 'biblatex ; use biblatex by default
+            ;; ##### Enable synctex correlation.
+            ;; ##### From Okular just press `Shift + Left click' to go to the good line.
+            ;; ##### From Evince just press `Ctrl + Left click' to go to the good line.
+              TeX-source-correlate-mode t
+              TeX-source-correlate-method 'synctex
+              TeX-source-correlate-start-server t
+              TeX-view-evince-keep-focus t
+            ;; automatically insert braces after sub/superscript in math mode
+            ;;  TeX-electric-sub-and-superscript t ; Deactivated since cdlatex does the same thing better
+            ;; If non-nil, then query the user before saving each file with TeX-save-document.
+              TeX-save-query nil
 
-        ;      TeX-view-program-selection '((output-pdf "PDF Tools"))
-          )
+            ;      TeX-view-program-selection '((output-pdf "PDF Tools"))
+              )
 #+end_src
 
 #+RESULTS:
@@ -1253,35 +2058,56 @@ New Snippet-Template
 
 *** My function definitions (vec, ddot, etc.)
 #+begin_src emacs-lisp
+  (setq cdlatex-math-modify-alist
+     '(
+       ( ?o   "\\interior"               nil        t   t   nil )
+      )
+     )
+
   (defun lb-ddot (arg)
-    (interactive "P")
-    (progn (push ?: unread-command-events) (cdlatex-math-modify arg))
-  )
+      (interactive "P")
+      (progn (push ?: unread-command-events) (cdlatex-math-modify arg))
+    )
 
-  (defun lb-vec (arg)
-    (interactive "P")
-    (progn (push ?> unread-command-events) (cdlatex-math-modify arg))
-  )
+    (defun lb-vec (arg)
+      (interactive "P")
+      (progn (push ?> unread-command-events) (cdlatex-math-modify arg))
+    )
 
-  (defun lb-dot (arg)
-    (interactive "P")
-    (progn (push ?. unread-command-events) (cdlatex-math-modify arg))
-  )
+    (defun lb-dot (arg)
+      (interactive "P")
+      (progn (push ?. unread-command-events) (cdlatex-math-modify arg))
+    )
 
-  (defun lb-hat (arg)
-    (interactive "P")
-    (progn (push ?^ unread-command-events) (cdlatex-math-modify arg))
-  )
+    (defun lb-hat (arg)
+      (interactive "P")
+      (progn (push ?^ unread-command-events) (cdlatex-math-modify arg))
+    )
 
-  (defun lb-tilde (arg)
-    (interactive "P")
-    (progn (push ?~ unread-command-events) (cdlatex-math-modify arg))
-  )
+    (defun lb-tilde (arg)
+      (interactive "P")
+      (progn (push ?~ unread-command-events) (cdlatex-math-modify arg))
+    )
 
-  (defun lb-bar (arg)
-    (interactive "P")
-    (progn (push ?- unread-command-events) (cdlatex-math-modify arg))
-  )
+    (defun lb-bar (arg)
+      (interactive "P")
+      (progn (push ?- unread-command-events) (cdlatex-math-modify arg))
+    )
+
+    (defun lb-overline (arg)
+      (interactive "P")
+      (progn (push ?T unread-command-events) (cdlatex-math-modify arg))
+    )
+
+    (defun lb-widehat (arg)
+      (interactive "P")
+      (progn (push ?T unread-command-events) (cdlatex-math-modify arg))
+    )
+
+    (defun lb-interior (arg)
+      (interactive "P")
+      (progn (push ?o unread-command-events) (cdlatex-math-modify arg))
+    )
 #+end_src
 
 ** YaSnippet - reload fix
@@ -1593,6 +2419,7 @@ Filepaths:
 
   (setq laas-accent-snippets nil)
   (setq laas-basic-snippets nil)
+  ;(setq laas-use-unicode t)
   (use-package laas
       :hook (LaTeX-mode . laas-mode)
       :config
@@ -1602,6 +2429,155 @@ Filepaths:
       )
 
    )
+#+end_src
+
+* Unicode-Math
+#+begin_src emacs-lisp
+  (use-package unicode-math-input)
+
+  ;; (set-input-method "unicode-math")
+#+end_src
+
+* Dict.cc
+:PROPERTIES:
+:CREATED: [2023-04-13 Do 21:07]
+:END:
+
+If dict.cc doesn't suffice, then I'll look up https://github.com/atykhonov/google-translate
+#+begin_src emacs-lisp
+  (use-package dictcc)
+  (setq dictcc-completion-backend 'completing-read)
+  (global-set-key (kbd "C-ü") 'dictcc)
+#+end_src
+
+* Emacs Chat.gpt
+:PROPERTIES:
+:CREATED: [2023-04-13 Do 21:35]
+:END:
+
+#+begin_src emacs-lisp
+  (use-package markdown-mode)
+
+  (use-package gptel)
+  (setq gptel-api-key "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")
+
+
+  (defun lb/write-next-gpt-input ()
+  "Jump to the next markdown heading and move cursor to the end of the line."
+  (interactive)
+  (markdown-next-visible-heading 1)
+  (end-of-line)
+  (insert " "))
+
+  (eval-after-load 'markdown-mode
+  '(define-key markdown-mode-map (kbd "C-c h") 'lb/write-next-gpt-input))
+
+#+end_src
+
+Alternatively: https://github.com/CarlQLange/chatgpt-arcana.el or https://github.com/joshcho/ChatGPT.el
+
+* Spell-Checking
+:PROPERTIES:
+:CREATED: [2023-05-18 Do 22:16]
+:END:
+
+For this to work one must first install following packages:
+On Debian or Ubuntu, install the packages libenchant-2-dev and pkg-config. On Fedora or RHEL, install the package enchant2-devel. On Mac, install enchant2 and pkgconfig.
+
+#+begin_src emacs-lisp
+  (use-package jinx)
+
+  (add-hook 'emacs-startup-hook #'global-jinx-mode)
+  (keymap-global-set "M-$" #'jinx-correct)
+  (keymap-global-set "C-M-$" #'jinx-languages)
+
+  (setq jinx-languages "en_US de_DE")
+
+#+end_src
+vertico-buffer
+                                    vertico-directory
+                                    vertico-flat
+                                    vertico-indexed
+                                    vertico-mouse
+                                    vertico-quick
+                                    vertico-repeat
+                                    vertico-reverse
+
+#+begin_src emacs-lisp
+    (use-package vertico-directory :straight nil)
+    (use-package vertico-flat :straight nil)
+    (use-package vertico-indexed :straight nil)
+    (use-package vertico-mouse :straight nil)
+    (use-package vertico-quick :straight nil)
+    (use-package vertico-repeat :straight nil)
+    (use-package vertico-reverse :straight nil)
+
+    (use-package vertico-multiform
+           :straight nil)
+
+    (add-to-list 'vertico-multiform-categories
+                 '(jinx grid (vertico-grid-annotate . 20)))
+    (vertico-multiform-mode 1)
+
+#+end_src
+* Emacs Terminal modes
+:PROPERTIES:
+:CREATED: [2023-04-18 Di 22:58]
+:END:
+
+** Term
+:PROPERTIES:
+:CREATED: [2023-04-18 Di 22:58]
+:END:
+#+begin_src emacs-lisp
+(use-package term
+  :config
+  (setq explicit-shell-file-name "bash") ;; Change this to zsh, etc
+  ;;(setq explicit-zsh-args '())         ;; Use 'explicit-<shell>-args for shell-specific args
+
+  ;; Match the default Bash shell prompt.  Update this if you have a custom prompt
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *"))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package eterm-256color
+  :hook (term-mode . eterm-256color-mode))
+#+end_src
+
+** Eshell
+:PROPERTIES:
+:CREATED: [2023-04-18 Di 23:14]
+:END:
+
+#+begin_src emacs-lisp
+  (defun lb/configure-eshell ()
+    ;; Save command history when commands are entered
+    (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+    ;; Truncate buffer for performance
+    (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+    ;; Bind some useful keys for evil-mode
+    ;; (evil-define-key '(normal insert visual) eshell-mode-map (kbd "C-r") 'counsel-esh-history)
+    ;; (evil-define-key '(normal insert visual) eshell-mode-map (kbd "<home>") 'eshell-bol)
+    ;; (evil-normalize-keymaps)
+
+    (setq eshell-history-size         10000
+          eshell-buffer-maximum-lines 10000
+          eshell-hist-ignoredups t
+          eshell-scroll-to-bottom-on-input t))
+
+  (use-package eshell-git-prompt)
+
+  (use-package eshell
+    :hook (eshell-first-time-mode . lb/configure-eshell)
+    :config
+
+    (with-eval-after-load 'esh-opt
+      (setq eshell-destroy-buffer-when-process-dies t)
+      (setq eshell-visual-commands '("htop" "zsh" "vim")))
+
+    (eshell-git-prompt-use-theme 'powerline))
 
 #+end_src
 

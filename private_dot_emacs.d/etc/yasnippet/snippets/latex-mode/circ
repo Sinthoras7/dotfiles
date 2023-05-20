@@ -4,4 +4,4 @@
 # group: math
 # condition: (and (texmathp) 'auto)
 # --
-\\circ
+∘

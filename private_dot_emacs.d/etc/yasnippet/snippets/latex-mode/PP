@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: PP
+# key: PP
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝒫

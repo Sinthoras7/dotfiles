@@ -1,5 +1,5 @@
-# key: !=
+# key: neq
 # name: neq
 # condition: (and (texmathp) 'auto)
 # --
-\\neq
+≠

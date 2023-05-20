@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: boxed
+# key: boxed
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\boxed{$1}$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: HH-(HilbertSpace)-outside
+# key: HH
+# condition:  (and (not (texmathp)) (quote auto))
+# --
+\\(ℋ\\)

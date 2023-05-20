@@ -2,4 +2,4 @@
 # name: includegraphics
 # key: ig
 # --
-\includegraphics[width=${4:\linewidth}]{`(call-interactively 'cdlatex-insert-filename)`}
+\includegraphics[width=${1:\linewidth}]{`(call-interactively 'cdlatex-insert-filename)`}

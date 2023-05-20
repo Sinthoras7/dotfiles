@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: abs
-# key: abs
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-\\abs{$1} $0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: SS-script-S
+# key: SS
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝒮

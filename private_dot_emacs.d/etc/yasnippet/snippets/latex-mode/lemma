@@ -1,0 +1,6 @@
+# key: lem
+# name: lemma
+# --
+\begin{lemma}{$1}{$2}
+$0
+\end{lemma}

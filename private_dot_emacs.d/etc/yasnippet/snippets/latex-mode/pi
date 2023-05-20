@@ -1,5 +1,7 @@
-# key: pi
+# -*- mode: snippet -*-
 # name: pi
+# key: þ
+# group: math
 # condition: (and (texmathp) 'auto)
 # --
-\\pi
+𝜋

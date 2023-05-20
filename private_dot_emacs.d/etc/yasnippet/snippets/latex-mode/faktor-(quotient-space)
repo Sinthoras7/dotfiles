@@ -1,0 +1,5 @@
+# key: quo
+# name: faktor-(quotient-space)
+# condition: 'texmathp
+# --
+\\faktor{$1}{$2}

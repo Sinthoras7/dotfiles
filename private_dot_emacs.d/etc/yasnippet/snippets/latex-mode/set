@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: set
-# key: set
+# key: seti
 # condition: (and (texmathp) 'auto)
 # group: math
 # --
-\\left\\{ $1 \\right\\}$0
+`(delete-char 1)`\\left\\{ $1 \\right\\} $0

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: xi
+# key: «
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝜉

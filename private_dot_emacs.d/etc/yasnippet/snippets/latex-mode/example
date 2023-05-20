@@ -1,0 +1,6 @@
+# key: exa
+# name: example
+# --
+\begin{example}{$1}{}
+$0
+\end{example}

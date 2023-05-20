@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: CC (complex numbers)
+# key: CC
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+ℂ

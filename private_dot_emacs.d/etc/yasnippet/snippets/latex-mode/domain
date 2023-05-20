@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: domain
+# key: dom
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝒟

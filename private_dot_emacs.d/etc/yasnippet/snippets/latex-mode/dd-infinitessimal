@@ -1,0 +1,5 @@
+# key: dnd
+# name: dd-to-n-infinitessimal
+# condition: (and (texmathp) 'auto)
+# --
+\\dd[${1:n}]{$2}$0

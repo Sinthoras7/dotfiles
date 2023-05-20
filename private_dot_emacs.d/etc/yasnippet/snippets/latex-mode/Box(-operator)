@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Box  or D'Alembert
+# key: Box
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\Box $0

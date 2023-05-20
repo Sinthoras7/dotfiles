@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: DD
+# name: DD (infinitissimal)
 # key: DD
 # group: math
 # condition: (and (texmathp) 'auto)

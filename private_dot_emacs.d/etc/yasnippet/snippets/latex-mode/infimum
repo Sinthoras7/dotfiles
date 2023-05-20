@@ -4,4 +4,4 @@
 # condition: (and (texmathp) 'auto)
 # group: math
 # --
-\\inf_{$1 \\in $2} $0
+\\inf_{$1 ∈ $2} $0

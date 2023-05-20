@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: phi
-# key: phi
+# key: đ
 # group: math
 # condition: (and (texmathp) 'auto)
 # --
-\\varphi
+𝜑

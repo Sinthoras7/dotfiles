@@ -1,0 +1,8 @@
+# key: booktabs
+# name: booktabs-table
+# --
+\\toprule
+$1 \\\\
+\\midrule
+
+\\\\ \\bottomrule

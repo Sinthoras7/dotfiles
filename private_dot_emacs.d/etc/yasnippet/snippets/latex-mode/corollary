@@ -1,0 +1,6 @@
+# key: coro
+# name: corollary
+# --
+\\begin{corollary}{$1}{$2}
+$3
+\\end{corollary}

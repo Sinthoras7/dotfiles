@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: \mathcal{B}
+# key: BB
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+ℬ

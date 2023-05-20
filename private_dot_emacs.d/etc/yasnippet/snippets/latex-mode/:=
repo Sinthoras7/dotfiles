@@ -1,0 +1,5 @@
+# key: :=
+# name: :=
+# condition: (and (texmathp) 'auto)
+# --
+≔ $0

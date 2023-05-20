@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: alg
+# key: alg
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝔄

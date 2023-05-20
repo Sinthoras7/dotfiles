@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: checkmark
+# key: check
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+✓

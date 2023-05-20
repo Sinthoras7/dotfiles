@@ -1,0 +1,5 @@
+# key: FF
+# name: Fourier
+# condition: (and (texmathp) 'auto)
+# --
+ℱ

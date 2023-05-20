@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathclap
+# key: clap
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\mathclap{$1}$0

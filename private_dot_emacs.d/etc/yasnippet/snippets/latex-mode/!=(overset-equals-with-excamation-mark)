@@ -1,0 +1,5 @@
+# key: !=
+# name: !=(overset-equals-with-excamation-mark)
+# condition: (and (texmathp) 'auto)
+# --
+\overset{!}{=}

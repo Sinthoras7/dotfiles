@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: parallel
+# key: parall
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+∥

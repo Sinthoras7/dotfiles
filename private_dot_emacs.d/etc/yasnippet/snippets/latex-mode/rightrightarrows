@@ -1,0 +1,5 @@
+# key: rrar
+# name: rightrightarrows
+# condition: (and (texmathp) 'auto)
+# --
+⇉

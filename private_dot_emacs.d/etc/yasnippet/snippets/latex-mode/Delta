@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Delta
+# key: Ð
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝛥
