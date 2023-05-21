@@ -270,8 +270,8 @@ Seemingly on Windows there are some errors without this
 
 Experimentell: Smooth Scrolling
 #+begin_src emacs-lisp
-(use-package good-scroll)
-  (good-scroll-mode 1)
+;;  (use-package good-scroll)
+;;  (good-scroll-mode 1)
 #+end_src
 ** Disable some warnings
 #+begin_src emacs-lisp
