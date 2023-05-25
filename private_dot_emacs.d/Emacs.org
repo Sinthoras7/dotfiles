@@ -1421,8 +1421,8 @@ I tried to use chatGPT, but it did not work...
 :created: [2023-04-06 Do 23:09]
 :end:
 #+begin_src emacs-lisp
-   (use-package org-ql
-      :straight t)
+  ;; (use-package org-ql
+  ;;    :straight t)
 #+end_src
 ** Org-archive-done-tasks
 :PROPERTIES:
