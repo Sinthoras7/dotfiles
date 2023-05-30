@@ -1,0 +1,7 @@
+default partial alphanumeric_keys
+xkb_symbols "uc" {
+    include "us(basic)"
+    include "level3(ralt_switch_multikey)"
+
+    name[Group1]="uc";
+};

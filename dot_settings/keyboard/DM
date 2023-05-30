@@ -1,0 +1,52 @@
+default partial alphanumeric_keys
+xkb_symbols "DM" {
+    name[Group1]="DM";
+    include "de(basic)"
+    include "level3(ralt_switch_multikey)"
+
+
+
+    // second row
+    // key <AD01>	{[               q,          Q,             U0040, NoSymbol,            masculine,                U2642 ]};
+    // key <AD02>	{[               w,          W,        dead_macron, NoSymbol,          ordfeminine,                U2640 ]};
+    key <AD03>	{[               e,          E,           eurosign, U1D700]};
+    key <AD04>	{[               r,          R,               U1D70C, NoSymbol]};
+    key <AD05>	{[               t,          T,           U1D70F, NoSymbol]};
+    key <AD06>	{[z, Z, U1D701]};
+    // key <AD07>	{[               u,          U,           dead_breve, NoSymbol,           rightarrow,            leftarrow ]};
+    key <AD08>	{[i, I, U1D704, U0222B]};
+    key <AD09>	{[o, O, U1D714, U1D6FA]};
+    key <AD10>	{[p, P, U1D70B, U1D6F1]};
+    // key <AD11>	{[      udiaeresis, Udiaeresis,            dead_horn, NoSymbol,                U2198,                U2197 ]};
+    key <AD12>	{[            plus,   asterisk, asciitilde, plusminus]};
+
+    // third row
+    // Per DIN 2137-1:2018-12, p. 11-12, (Alt)Gr+a can either invoke
+    // a selection possibility for emojis or special characters, or
+    // output the U+263A smiley.
+
+    key <AC01> { [a, A, U1D6FC,   U2200]};
+    key <AC02>	{[s, S, U1D70E, U1D6F4]};
+    key <AC03>	{[d, D, U1D6FF, U1D6E5]};
+    key <AC04>	{[f, F, U1D711, U1D6F7]};
+    key <AC05>	{[g, G, U1D6FE, U1D6E4]};
+    // key <AC06>	{[               h,          H,     dead_belowmacron, NoSymbol,                U02BE,                U261A ]};
+    // key <AC07>	{[               j,          J,         dead_cedilla, NoSymbol,                U02B9,                U02BA ]};
+    key <AC08>	{[k, K, U1D705]};
+    key <AC09>	{[l, L, U1D706, U1D6EC]};
+    // key <AC10>	{[      odiaeresis, Odiaeresis,        dead_belowdot, NoSymbol,                   oe,                   OE ]};
+    // key <AC11>	{[      adiaeresis, Adiaeresis,          dead_stroke, NoSymbol,                   ae,                   AE ]};
+    // key <BKSL>	{[      numbersign, apostrophe,                U2212, NoSymbol,                U2020,                U2021 ]};
+
+    // fourth row
+    // key <AB01>	{[               y,          Y,                U203A, NoSymbol,                U2423,                U23D1 ]};
+    key <AB02>	{[x, X,  U1D709, U1D6EF]};
+    key <AB03>	{[c, C,  U1D712]};
+    // key <AB04>	{[               v,          V,        guillemotleft, NoSymbol,  leftdoublequotemark,  leftsinglequotemark ]};
+    key <AB05>	{[b, B, U1D6FD]};
+    key <AB06>	{[n, N, U1D708]};
+    key <AB07>	{[m, M, U1D707]};
+    // key <AB08>	{[           comma,  semicolon,                U2011, NoSymbol,                U02BB,                U2661 ]};
+    // key <AB09>	{[          period,      colon,       periodcentered, NoSymbol,             ellipsis,                U2713 ]};
+    // key <AB10>	{[           minus, underscore,               hyphen, NoSymbol,                U2022,                U25E6 ]};
+};
