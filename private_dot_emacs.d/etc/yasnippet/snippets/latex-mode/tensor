@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tensor
+# key: ten
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\tensor{$1}{$2}

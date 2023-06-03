@@ -1207,4 +1207,4 @@
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/!=(overset-equals-with-excamation-mark)" nil nil)))
 
 
-;;; Do not edit! File generated at Thu May 25 11:09:10 2023
+;;; Do not edit! File generated at Sat Jun  3 22:52:29 2023
