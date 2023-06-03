@@ -1344,13 +1344,6 @@
   <layoutList>
     <layout>
       <configItem>
-        <name>DM</name>
-        <shortDesciption>DM</shortDescription>
-        <description>German Keyboard with added custom math commands.</description>
-      </configItem>
-    </layout>
-    <layout>
-      <configItem>
         <name>us</name>
         <!-- Keyboard indicator for English layouts -->
         <shortDescription>en</shortDescription>
@@ -3867,6 +3860,13 @@
           </configItem>
         </variant>
       </variantList>
+    </layout>
+    <layout>
+      <configItem>
+        <name>DM</name>
+        <shortDesciption>DM</shortDescription>
+        <description>German Keyboard with added custom math commands.</description>
+      </configItem>
     </layout>
     <layout>
       <configItem>

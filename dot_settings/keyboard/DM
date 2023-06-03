@@ -5,18 +5,18 @@ xkb_symbols "DM" {
     include "level3(ralt_switch_multikey)"
 
 
-    key <TLDE>	{[ dead_circumflex, degree,  U027E8, U02016]};
-    key <AE01>	{[1, exclam,                 U027E9, U1D7D9]};
+    key <TLDE>	{[ dead_circumflex, degree, U207B, U02016]};
+    key <AE01>	{[1, exclam, onesuperior , U1D7D9]};
     // key <AE02>	{[               2,        quotedbl,     twosuperior,        NoSymbol,     twosuperior,        currency,           U02BA ]};
-    // key <AE03>	{[               3,         section,   threesuperior,        NoSymbol,   threesuperior,        sterling,           U02BF ]};
-    // key <AE04>	{[               4,          dollar,          emdash,        NoSymbol,      onequarter,        EuroSign,           U02BE ]};
-    // key <AE05>	{[               5,         percent,      exclamdown,        NoSymbol,         onehalf,         uparrow,           U02C1 ]};
-    // key <AE06>	{[               6,       ampersand,    questiondown,        NoSymbol,   threequarters,       downarrow,           U02C0 ]};
+    // key <AE03>	{[3, section, threesuperior]};
+    key <AE04>	{[4, dollar, U027E8, U0221D]};
+    key <AE05>	{[5, percent, U027E9, onehalf]};
+    key <AE06>	{[6, ampersand, notsign, U02248]};
     key <AE07>	{[7, slash, braceleft, U029F5]};
-    // key <AE08>	{[               8,       parenleft,     bracketleft,        NoSymbol,    threeeighths,      rightarrow,      braceright ]};
-    // key <AE09>	{[               9,      parenright,    bracketright,        NoSymbol,     fiveeighths,       plusminus,     bracketleft ]};
+    key <AE08>	{[8, parenleft, bracketleft, U02245]};
+    key <AE09>	{[9, parenright, bracketright, U2254]};
     key <AE10>	{[0, equal, braceright, U02260  ]};
-    // key <AE11>	{[          ssharp,        question,       backslash,        NoSymbol,       backslash,    questiondown,           U02BB ]};
+    key <AE11>	{[ssharp, question,  backslash,  U02255]};
     // key <AE12>	{[      dead_acute,      dead_grave,   dead_abovedot,        NoSymbol,    dead_cedilla,     dead_ogonek,         notsign ]};
 
 
