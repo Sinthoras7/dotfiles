@@ -112,6 +112,7 @@
 \RequirePackage[stretch=10,shrink=10]{microtype}
 
 
+\RequirePackage{tensor}
 
 \RequirePackage{setspace}
 \RequirePackage[inline]{enumitem}
@@ -251,7 +252,7 @@ sorting=none]{biblatex}
 %\RequirePackage[]{listings} % Codeblocks, thus not necessary with minted
 \ifbool{lbscript@minted}{
     \RequirePackage[newfloat]{minted} % Nice looking colored Codeblocks
-    \setminted{linenos, frame=lines, breaklines, fontsize=\small}
+    \setminted{linenos, frame=lines, breaklines, fontsize=\small, breakafter=-/}
   }{
 }
 
@@ -455,7 +456,10 @@ borderline west={1mm}{0pt}{green}}
 \DeclareMathOperator{\supess}{supess}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\sym}{sym}
-
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\ISO}{ISO}
+\DeclareMathOperator{\iso}{iso}
 
 %% From some stackexchange site
 %% This gives a double slash
