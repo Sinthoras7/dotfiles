@@ -470,35 +470,37 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 #+begin_src emacs-lisp
 
-  (customize-set-variable 'evil-want-keybinding nil)
+    (customize-set-variable 'evil-want-keybinding nil)
 
-  (use-package evil)
-  (use-package evil-collection)
-
-
-  (when ( < emacs-major-version 28)
-   (use-package undo-tree)
-   (global-undo-tree-mode)
-  )
+    (use-package evil)
+    (use-package evil-collection)
 
 
-
-  (customize-set-variable 'evil-want-integration t)
-  (customize-set-variable 'evil-want-C-i-jump nil)
-  (customize-set-variable 'evil-respect-visual-line-mode t)
-  ;; C-h is backspace in insert state
-  (customize-set-variable 'evil-want-C-h-delete t)
-  (if (< emacs-major-version 28)
-    (customize-set-variable 'evil-undo-system 'undo-tree)
-    (customize-set-variable 'evil-undo-system 'undo-redo)
-  )
+    (when ( < emacs-major-version 28)
+     (use-package undo-tree)
+     (global-undo-tree-mode)
+    )
 
 
 
-    (customize-set-variable 'evil-want-C-i-jump t)
-;;  (customize-set-variable 'evil-want-Y-yank-to-eol nil)
-    (customize-set-variable 'evil-want-fine-undo t)
+    (customize-set-variable 'evil-want-integration t)
+    (customize-set-variable 'evil-want-C-i-jump nil)
+    (customize-set-variable 'evil-respect-visual-line-mode t)
+    ;; C-h is backspace in insert state
+    (customize-set-variable 'evil-want-C-h-delete t)
+    (if (< emacs-major-version 28)
+      (customize-set-variable 'evil-undo-system 'undo-tree)
+      (customize-set-variable 'evil-undo-system 'undo-redo)
+    )
 
+
+
+      (customize-set-variable 'evil-want-C-i-jump t)
+  ;;  (customize-set-variable 'evil-want-Y-yank-to-eol nil)
+      (customize-set-variable 'evil-want-fine-undo t)
+
+
+      (customize-set-variable 'evil-emacs-state-cursor 'hbar)
 #+end_src
 
 #+begin_src emacs-lisp
