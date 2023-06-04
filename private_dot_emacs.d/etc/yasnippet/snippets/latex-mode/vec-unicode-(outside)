@@ -1,0 +1,8 @@
+# type: command
+# key: ⃗
+# name: vec-unicode-(outside)
+# expand-env: ((argument 't))
+# condition: (and (not (texmathp)) 'auto)
+# --
+(progn
+  (call-interactively #'lb-vec))
