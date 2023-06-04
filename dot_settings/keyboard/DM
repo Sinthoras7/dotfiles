@@ -5,10 +5,10 @@ xkb_symbols "DM" {
     include "level3(ralt_switch_multikey)"
 
 
-    key <TLDE>	{[ dead_circumflex, degree, U207B, U02016]};
-    key <AE01>	{[1, exclam, onesuperior , U1D7D9]};
-    // key <AE02>	{[               2,        quotedbl,     twosuperior,        NoSymbol,     twosuperior,        currency,           U02BA ]};
-    // key <AE03>	{[3, section, threesuperior]};
+    key <TLDE>	{[dead_circumflex, degree, U207B, U02016]};
+    key <AE01>	{[1, exclam, onesuperior,   U1D7D9]};
+    key <AE02>	{[2, quotedbl, twosuperior, U00305]};
+    key <AE03>	{[3, section, threesuperior, U000D7]};
     key <AE04>	{[4, dollar, U027E8, U0221D]};
     key <AE05>	{[5, percent, U027E9, onehalf]};
     key <AE06>	{[6, ampersand, notsign, U02248]};
@@ -17,7 +17,7 @@ xkb_symbols "DM" {
     key <AE09>	{[9, parenright, bracketright, U2254]};
     key <AE10>	{[0, equal, braceright, U02260  ]};
     key <AE11>	{[ssharp, question,  backslash,  U02255]};
-    // key <AE12>	{[      dead_acute,      dead_grave,   dead_abovedot,        NoSymbol,    dead_cedilla,     dead_ogonek,         notsign ]};
+    key <AE12>	{[dead_acute, dead_grave, zerosuperior, U00302]};
 
 
 
@@ -58,7 +58,7 @@ xkb_symbols "DM" {
     key <AB01>	{[y, Y, U02264, U02265]};
     key <AB02>	{[x, X, U1D709, U1D6EF]};
     key <AB03>	{[c, C, U1D712, U02102]};
-    key <AB04>	{[v, V, U000D7, U0221E]};
+    key <AB04>	{[v, V, U020D7, U0221E]};
     key <AB05>	{[b, B, U1D6FD, U02202]}; 
     key <AB06>	{[n, N, U1D708, U02207]};
     key <AB07>	{[m, M, U1D707, U021A6]};
