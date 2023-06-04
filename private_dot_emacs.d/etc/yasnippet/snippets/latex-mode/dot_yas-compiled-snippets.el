@@ -11,6 +11,29 @@
                        ("verb" "\\begin{verbatim}\n$0\n\\end{verbatim}\n" "\\begin{verbatim} ... \\end{verbatim}" nil
                         ("environments")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/verb.yasnippet" nil nil)
+                       ("⃗"
+                        (progn
+                          (progn
+                            (call-interactively #'lb-vec)))
+                        "vec-unicode-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        nil
+                        ((argument 't))
+                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/vec-unicode-(outside)" nil nil)
+                       ("⃗"
+                        (progn
+                          (progn
+                            (call-interactively #'lb-vec)))
+                        "vec-unicode"
+                        (and
+                         (texmathp)
+                         'auto)
+                        nil
+                        ((argument 't))
+                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/vec-unicode" nil nil)
                        ("vec(old)" "`(condition-case nil (progn (backward-sexp) (kill-sexp) (delete-char 1)) (error (setq argument 'nil)))`\\\\vec{`(if argument (current-kill 0))`}$0" "vec(old)"
                         (and
                          (texmathp)
@@ -126,7 +149,7 @@
                          (texmathp)
                          'auto)
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/stackrel" nil nil)
-                       ("sqrt" "\\\\sqrt{$0}" "sqrt"
+                       ("√" "\\\\sqrt{$0}" "sqrt"
                         (and
                          (texmathp)
                          'auto)
@@ -252,6 +275,17 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/overset" nil nil)
+                       ("̅"
+                        (progn
+                          (progn
+                            (call-interactively #'lb-overline)))
+                        "overline-unicode"
+                        (and
+                         (texmathp)
+                         'auto)
+                        nil
+                        ((argument 't))
+                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/overline-unicode" nil nil)
                        ("ø" "𝜔" "omega"
                         (and
                          (texmathp)
@@ -379,6 +413,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/ket" nil nil)
+                       ("𝜅" "\\\\(𝜅\\\\)" "kappa-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/kappa-(outside)" nil nil)
                        ("item" "\\begin{itemize}\n\\item $0\n\\end{itemize}\n" "\\begin{itemize} ... \\end{itemize}" nil
                         ("environments")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/itemize" nil nil)
@@ -458,6 +499,16 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/hookrightarrow" nil nil)
+                       ("̂"
+                        (progn
+                          (call-interactively #'lb-hat))
+                        "hat-unicode"
+                        (and
+                         (texmathp)
+                         'auto)
+                        nil
+                        ((argument 't))
+                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/hat-unicode" nil nil)
                        ("hat"
                         (progn
                           (call-interactively #'lb-hat))
@@ -933,4 +984,4 @@
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/!=(overset-equals-with-excamation-mark)" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Jun  4 12:20:19 2023
+;;; Do not edit! File generated at Sun Jun  4 16:35:57 2023
