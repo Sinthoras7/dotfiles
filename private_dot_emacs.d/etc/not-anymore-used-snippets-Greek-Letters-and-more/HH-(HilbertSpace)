@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: HH-(HilbertSpace)
+# key: HH
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+ℋ

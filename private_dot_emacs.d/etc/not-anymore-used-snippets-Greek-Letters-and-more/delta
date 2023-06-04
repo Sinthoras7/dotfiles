@@ -1,0 +1,5 @@
+# key: ð
+# name: delta
+# condition: (and (texmathp) 'auto)
+# --
+𝛿

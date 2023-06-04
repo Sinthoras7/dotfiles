@@ -1,0 +1,7 @@
+# type: command
+# key: ̂
+# name: hat-unicode
+# expand-env: ((argument 't))
+# condition: (and (texmathp) 'auto)
+# --
+(call-interactively #'lb-hat)

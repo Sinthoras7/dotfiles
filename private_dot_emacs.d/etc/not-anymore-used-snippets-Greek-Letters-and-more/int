@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: integral
+# key: inti
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+∫

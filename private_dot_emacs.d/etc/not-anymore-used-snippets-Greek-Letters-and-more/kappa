@@ -1,0 +1,5 @@
+# key: ĸ
+# name: kappa
+# condition: (and (texmathp) 'auto)
+# --
+𝜘

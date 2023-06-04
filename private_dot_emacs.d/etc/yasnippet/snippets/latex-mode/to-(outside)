@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: implies-(outside)
-# key: ⟹
-# group: math
+# name: to-(outside)
+# key: →
 # condition: (and (not (texmathp)) (quote auto))
 # --
-\\(⟹\\)
+\\(→\\)

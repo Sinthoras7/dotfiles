@@ -1,0 +1,5 @@
+# key: æ
+# name: alpha
+# condition: (and (texmathp) 'auto)
+# --
+𝛼

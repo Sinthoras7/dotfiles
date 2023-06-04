@@ -1,0 +1,8 @@
+# type: command
+# key: ̅
+# name: overline-unicode
+# expand-env: ((argument 't))
+# condition: (and (texmathp) 'auto)
+# --
+(progn
+  (call-interactively #'lb-overline))

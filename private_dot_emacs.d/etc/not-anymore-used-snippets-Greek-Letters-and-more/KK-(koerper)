@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: KK-(koerper)
+# key: KK
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝕂

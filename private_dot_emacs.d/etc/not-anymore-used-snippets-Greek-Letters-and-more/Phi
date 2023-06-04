@@ -1,0 +1,5 @@
+# key: ª
+# name: Phi
+# condition: (and (texmathp) 'auto)
+# --
+𝛷
