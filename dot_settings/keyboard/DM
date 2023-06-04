@@ -7,7 +7,7 @@ xkb_symbols "DM" {
 
     key <TLDE>	{[dead_circumflex, degree, U207B, U02016]};
     key <AE01>	{[1, exclam, onesuperior,   U1D7D9]};
-    key <AE02>	{[2, quotedbl, twosuperior, U00305]};
+    key <AE02>	{[2, quotedbl, twosuperior, U22C5]};  // last is cdot
     key <AE03>	{[3, section, threesuperior, U000D7]};
     key <AE04>	{[4, dollar, U027E8, U0221D]};
     key <AE05>	{[5, percent, U027E9, onehalf]};
@@ -17,8 +17,8 @@ xkb_symbols "DM" {
     key <AE09>	{[9, parenright, bracketright, U2254]};
     key <AE10>	{[0, equal, braceright, U02260  ]};
     key <AE11>	{[ssharp, question,  backslash,  U02255]};
-    key <AE12>	{[dead_acute, dead_grave, zerosuperior, U00302]};
-
+    key <AE12>	{[dead_acute, dead_grave, zerosuperior, U2218]};
+ 
 
 
     // second row
@@ -62,10 +62,8 @@ xkb_symbols "DM" {
     key <AB05>	{[b, B, U1D6FD, U02202]}; 
     key <AB06>	{[n, N, U1D708, U02207]};
     key <AB07>	{[m, M, U1D707, U021A6]};
-    // key <AB08>	{[           comma,  semicolon,                U2011, NoSymbol,                U02BB,                U2661 ]};
-    // key <AB09>	{[          period,      colon,       periodcentered, NoSymbol,             ellipsis,                U2713 ]};
-    // key <AB10>	{[           minus, underscore,               hyphen, NoSymbol,                U2022,                U25E6 ]};
+    key <AB08>	{[comma, semicolon, U221A, U00302]}; // square root, hat
+    key <AB09>	{[period, colon, U00305, U00307]}; // overline, dot
+    // key <AB10>	{[minus, underscore, hyphen, NoSymbol, U2022, U25E6]};
 };
-
-
 
