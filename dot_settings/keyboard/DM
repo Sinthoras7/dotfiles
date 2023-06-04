@@ -4,7 +4,16 @@ xkb_symbols "DM" {
     include "de(basic)"
     include "level3(ralt_switch_multikey)"
 
+    // F-keys
+    key <FK01> {[F1, F1, U2081]};
+    key <FK02> {[F2, F2, U2082]};
+    key <FK03> {[F3, F3, U2083]};
 
+    key <FK10> {[F10, F10, U2080]};
+
+
+
+    // first row
     key <TLDE>	{[dead_circumflex, degree, U207B, U02016]};
     key <AE01>	{[1, exclam, onesuperior,   U1D7D9]};
     key <AE02>	{[2, quotedbl, twosuperior, U22C5]};  // last is cdot
@@ -17,8 +26,7 @@ xkb_symbols "DM" {
     key <AE09>	{[9, parenright, bracketright, U2254]};
     key <AE10>	{[0, equal, braceright, U02260  ]};
     key <AE11>	{[ssharp, question,  backslash,  U02255]};
-    key <AE12>	{[dead_acute, dead_grave, zerosuperior, U2218]};
- 
+    key <AE12>	{[dead_acute, grave, zerosuperior, U2218]}; 
 
 
     // second row
@@ -66,4 +74,7 @@ xkb_symbols "DM" {
     key <AB09>	{[period, colon, U00305, U00307]}; // overline, dot
     // key <AB10>	{[minus, underscore, hyphen, NoSymbol, U2022, U25E6]};
 };
+
+
+
 
