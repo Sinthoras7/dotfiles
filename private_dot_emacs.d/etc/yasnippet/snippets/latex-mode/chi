@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: chi
-# key: ¢
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-𝜒

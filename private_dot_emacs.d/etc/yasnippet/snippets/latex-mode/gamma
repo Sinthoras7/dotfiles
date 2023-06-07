@@ -1,5 +1,0 @@
-# key: ŋ
-# name: gamma
-# condition: (and (texmathp) 'auto)
-# --
-𝛾

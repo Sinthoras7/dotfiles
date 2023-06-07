@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: ZZ (whole numbers)
-# key: ZZ
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-ℤ

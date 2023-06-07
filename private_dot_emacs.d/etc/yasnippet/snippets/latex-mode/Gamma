@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: Gamma
-# key: Ŋ
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-𝛤

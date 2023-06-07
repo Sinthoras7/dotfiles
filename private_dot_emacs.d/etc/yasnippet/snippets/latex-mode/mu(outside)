@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: mu(outside)
-# key: µ
-# condition:  (and (not (texmathp)) (quote auto))
-# --
-\\(𝜇\\)

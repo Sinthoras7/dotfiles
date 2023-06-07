@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: RR (Real numbers)
-# key: RR
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-ℝ

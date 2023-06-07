@@ -1,5 +1,0 @@
-# key: setminus
-# name: setminus
-# condition: (and (texmathp) 'auto)
-# --
-\\setminus $0

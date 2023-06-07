@@ -1,5 +1,0 @@
-# key: cong
-# name: cong (isomorphic symbol)
-# condition: (and (texmathp) 'auto)
-# --
-≅

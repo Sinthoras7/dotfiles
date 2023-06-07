@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: iota
-# key: →
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-𝜄

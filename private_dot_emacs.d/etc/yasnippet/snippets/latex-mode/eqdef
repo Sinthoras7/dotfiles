@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: eqdef
-# key: eqdef
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-≝

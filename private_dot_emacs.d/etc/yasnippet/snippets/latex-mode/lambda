@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: lambda
-# key: ł
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-𝜆

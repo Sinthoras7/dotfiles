@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: xi(outside)
-# key: «
-# condition:  (and (not (texmathp)) (quote auto))
-# --
-\\(𝜉\\)

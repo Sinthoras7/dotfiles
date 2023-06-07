@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: sigma(outside)
-# key: ſ
-# condition:  (and (not (texmathp)) (quote auto))
-# --
-\\(𝜎\\)

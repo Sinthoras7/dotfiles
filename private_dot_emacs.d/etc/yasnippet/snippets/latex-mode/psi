@@ -1,5 +1,0 @@
-# key: psi
-# name: psi
-# condition: (and (texmathp) 'auto)
-# --
-𝜓

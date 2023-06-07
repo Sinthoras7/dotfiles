@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: tau
-# key: ŧ
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-𝜏
