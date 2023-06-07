@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: iff-symbol-outside
+# key: iff
+# group: math
+# condition: (not (texmathp))
+# --
+\\(\iff\\)

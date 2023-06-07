@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: omega
+# key: ø
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+𝜔

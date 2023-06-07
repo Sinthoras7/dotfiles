@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: rational-symbol-(outside)
+# key: ℚ
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(ℚ\\)
