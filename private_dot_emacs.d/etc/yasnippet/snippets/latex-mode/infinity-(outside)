@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: infinity-(outside)
+# key: ∞
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(∞\\)

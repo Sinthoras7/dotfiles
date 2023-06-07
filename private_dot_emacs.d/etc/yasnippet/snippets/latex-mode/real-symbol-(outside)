@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: real-symbol-(outside)
+# key: ℝ
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(ℝ\\)

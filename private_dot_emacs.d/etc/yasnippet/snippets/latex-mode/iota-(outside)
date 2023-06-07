@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: iota-(outside)
+# key: 𝜄
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\(𝜄\\)

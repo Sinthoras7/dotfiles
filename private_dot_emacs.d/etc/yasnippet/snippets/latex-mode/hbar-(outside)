@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hbar-(outside)
+# key: ℏ
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(ℏ\\)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: complex-numbers-symbol-(outside)
+# key: ℂ
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(ℂ\\)

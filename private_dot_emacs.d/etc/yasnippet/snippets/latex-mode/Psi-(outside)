@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Psi-(outside)
+# key: 𝛹
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+\\(𝛹\\)
