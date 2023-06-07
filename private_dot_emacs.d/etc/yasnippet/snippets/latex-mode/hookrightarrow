@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: hookrightarrow
-# key: embed
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-↪

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: infty
-# key: ooo
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-∞

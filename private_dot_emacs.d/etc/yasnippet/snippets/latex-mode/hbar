@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: hbar
-# key: ħ
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-ℏ
