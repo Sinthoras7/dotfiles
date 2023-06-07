@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: eta
-# key: eta
-# group: math
-# condition: (and (texmathp) 'auto)
-# --
-𝜂
