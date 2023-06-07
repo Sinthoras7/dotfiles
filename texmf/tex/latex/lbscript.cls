@@ -380,6 +380,7 @@ sorting=none]{biblatex}
     \newtcbtheorem[use counter from=theorem, crefname={Remarks}{Remarks}]{remarks}{Remarks}{rem, separator sign={}, description delimiters parenthesis}{rem}
     \newtcbtheorem[use counter from=theorem, crefname={Insertion}{Insertions}]{insertion}{Insertion}{rem, separator sign={}, description delimiters parenthesis}{ins}
     \newtcbtheorem[use counter from=theorem, list inside=thmlist, crefname={Example}{Examples}]{example}{Example}{examplestyle, separator sign={}, description delimiters parenthesis}{exa}
+    \newtcbtheorem[use counter from=theorem, list inside=thmlist, crefname={Examples}{Examples}]{examples}{Examples}{examplestyle, separator sign={}, description delimiters parenthesis}{exas}
   }{
     \newtcbtheorem[number within=section, list inside=thmlist, crefname={Satz}{Sätze}]{theorem}{Satz}{mytheoremstyle, separator sign={}, description delimiters parenthesis}{th}
     \newtcbtheorem[use counter from=theorem, list inside=thmlist, crefname={Korollar}{Korollare}]{corollary}{Korollar}{mytheoremstyle, separator sign={}, description delimiters parenthesis}{cor}
@@ -389,6 +390,7 @@ sorting=none]{biblatex}
     \newtcbtheorem[use counter from=theorem, crefname={Bemerkungen}{Bemerkungen}]{remarks}{Bemerkungen}{rem, separator sign={}, description delimiters parenthesis}{rem}
     \newtcbtheorem[use counter from=theorem, crefname={Einschub}{Einschübe}]{insertion}{Einschub}{rem, separator sign={}, description delimiters parenthesis}{ins}
     \newtcbtheorem[use counter from=theorem, list inside=thmlist, crefname={Beispiel}{Beispiele}]{example}{Beispiel}{examplestyle, separator sign={}, description delimiters parenthesis}{exa}
+    \newtcbtheorem[use counter from=theorem, list inside=thmlist, crefname={Beispiele}{Beispiele}]{example}{Beispiele}{examplestyle, separator sign={}, description delimiters parenthesis}{exas}
 }
 
 \newtcbtheorem[use counter from=theorem, list inside=thmlist, crefname={Lemma}{Lemmata}]{lemma}{Lemma}%
