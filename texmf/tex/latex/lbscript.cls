@@ -462,6 +462,7 @@ borderline west={1mm}{0pt}{green}}
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\ISO}{ISO}
 \DeclareMathOperator{\iso}{iso}
+\DeclareMathOperator{\SL}{SL}
 
 %% From some stackexchange site
 %% This gives a double slash
