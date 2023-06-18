@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: rho-(outside)
+# key: 𝜌
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(𝜌\\)

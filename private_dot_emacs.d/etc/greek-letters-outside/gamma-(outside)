@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: gamma-(outside)
+# key: 𝛾
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(𝛾\\)

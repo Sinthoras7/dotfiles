@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: scripture-H-(outside)
+# key: ℋ
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(ℋ\\)

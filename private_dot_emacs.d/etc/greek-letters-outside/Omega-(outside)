@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Omega-(outside)
+# key: 𝛺
+# group: math
+# condition: (and (not (texmathp)) 'auto)
+# --
+\\(𝛺\\)

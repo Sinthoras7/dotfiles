@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: Box  or D'Alembert
-# key: Box
+# name: iota-(outside)
+# key: 𝜄
 # group: math
 # condition: (and (texmathp) 'auto)
 # --
-☐
+\\(𝜄\\)

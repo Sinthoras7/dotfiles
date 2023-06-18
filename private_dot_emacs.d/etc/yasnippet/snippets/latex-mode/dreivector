@@ -1,0 +1,5 @@
+# key: 3v
+# name: dreivector
+# condition: (texmathp)
+# --
+\\dreivector{$0}{}{}

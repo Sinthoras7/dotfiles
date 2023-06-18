@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: zweiervector
+# key: 2v
+# group: math
+# condition: (texmathp)
+# --
+\\zweivector{$0}{}

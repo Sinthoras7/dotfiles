@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: zwei-kreuz-zwei-matrix
+# key: zzm
+# group: math
+# condition: (texmathp)
+# --
+\ZweiKreuzZweiMatrix{$0}{}{}{}
