@@ -17,7 +17,7 @@ xkb_symbols "DM" {
     key <FK05> {[F5, F5, U21AA, U21A0]}; // injective arrow, surjective arrow
     key <FK06> {[F6, F6, U21DD, U27F8]}; // rightsquigarrow, impliedby
 
-    key <FK08> {[F8, F8, U0207]}; // nabla
+    key <FK08> {[F8, F8, U02207]}; // nabla
     key <FK10> {[F10, F10, U2080]};
 
     // first row
