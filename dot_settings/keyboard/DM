@@ -6,7 +6,7 @@ xkb_symbols "DM" {
 
 
     // swap Escape and Caps_Lock
-    key <ESC> { [Caps_Lock] };
+    // key <ESC> { [Caps_Lock] };
     key <CAPS> { [Escape] };
 
     // F-keys
