@@ -2,12 +2,34 @@
 ;;; Snippet definitions:
 ;;;
 (yas-define-snippets 'latex-mode
-                     '(("«" "\\\\(𝜉\\\\)" "xi(outside)"
+                     '(("2v" "\\\\zweivector{$0}{}" "zweiervector"
+                        (auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/zweiervector" nil nil)
+                       ("zzm" "\\ZweiKreuzZweiMatrix{$0}{}{}{}" "zwei-kreuz-zwei-matrix"
+                        (texmathp)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/zwei-kreuz-zwei-matrix" nil nil)
+                       ("𝜁" "\\\\(𝜁\\\\)" "zeta-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/xi(outside)" nil nil)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/zeta-(outside)" nil nil)
+                       ("𝜉" "\\\\(𝜉\\\\)" "xi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/xi-(outside)" nil nil)
+                       ("ℤ" "\\\\(ℤ\\\\)" "whole-numbers-symbol-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/whole-numbers-symbol-(outside)" nil nil)
                        ("verb" "\\begin{verbatim}\n$0\n\\end{verbatim}\n" "\\begin{verbatim} ... \\end{verbatim}" nil
                         ("environments")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/verb.yasnippet" nil nil)
@@ -76,6 +98,13 @@
                         ("math")
                         ((argument 't))
                         "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/tilde" nil nil)
+                       ("𝜃" "\\\\(𝜃\\\\)" "theta-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/theta-(outside)" nil nil)
                        ("thus" "\\\\therefore " "therefore"
                         (and
                          (texmathp)
@@ -89,12 +118,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/tensor" nil nil)
-                       ("ŧ" "𝜏" "tau"
+                       ("𝜏" "\\\\(𝜏\\\\)" "tau-(outside)"
                         (and
-                         (texmathp)
+                         (not
+                          (texmathp))
                          'auto)
                         ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/tau" nil nil)
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/tau-(outside)" nil nil)
                        ("tan" "\\\\tan" "tan"
                         (and
                          (texmathp)
@@ -176,12 +206,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/similar" nil nil)
-                       ("ſ" "\\\\(𝜎\\\\)" "sigma(outside)"
+                       ("𝜎" "\\\\(𝜎\\\\)" "sigma-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/sigma(outside)" nil nil)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/sigma-(outside)" nil nil)
                        ("seti" "`(delete-char 1)`\\\\left\\\\{ $1 \\\\right\\\\} $0" "set"
                         (and
                          (texmathp)
@@ -194,6 +225,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/secans" nil nil)
+                       ("ℋ" "\\\\(ℋ\\\\)" "scripture-H-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/scripture-H-(outside)" nil nil)
                        ("scal" "⟨$1⟩" "scal(ar-product)"
                         (and
                          (texmathp)
@@ -217,6 +255,13 @@
                          (texmathp)
                          'auto)
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/rightharpoondown" nil nil)
+                       ("𝜌" "\\\\(𝜌\\\\)" "rho-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/rho-(outside)" nil nil)
                        ("res" "ℛ" "residuum"
                         (and
                          (texmathp)
@@ -228,6 +273,13 @@
                        ("ref" "`(reftex-reference (kbd \"c\"))`" "\\ref" nil
                         ("references")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/ref.yasnippet" nil nil)
+                       ("ℝ" "\\\\(ℝ\\\\)" "real-symbol-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/real-symbol-(outside)" nil nil)
                        ("rd" "^{($1)}" "rd"
                         (and
                          (texmathp)
@@ -251,6 +303,20 @@
                        ("prod" "\\prod_{$1}^{$2}$0\n" "\\prod_{n}^{}" nil
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/prod.yasnippet" nil nil)
+                       ("𝜋" "\\\\(𝜋\\\\)" "pi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/pi-(outside)" nil nil)
+                       ("𝜑" "\\\\(𝜑\\\\)" "phi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/phi-(outside)" nil nil)
                        ("perp" "⟂" "perp"
                         (and
                          (texmathp)
@@ -286,12 +352,20 @@
                         nil
                         ((argument 't))
                         "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/overline-unicode" nil nil)
-                       ("ø" "𝜔" "omega"
+                       ("𝜔" "\\\\(𝜔\\\\)" "omega-outside"
                         (and
-                         (texmathp)
+                         (not
+                          (texmathp))
                          'auto)
                         ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/omega" nil nil)
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/omega-outside" nil nil)
+                       ("𝜈" "\\\\(𝜈\\\\)" "nu-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/nu-(outside)" nil nil)
                        ("nEE" "∄" "notexists"
                         (and
                          (texmathp)
@@ -322,26 +396,19 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/newline" nil nil)
-                       ("neq" "≠" "neq"
-                        (and
-                         (texmathp)
-                         'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/neq" nil nil)
                        ("nabl" "\\\\vec{∇}" "nabla"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/nabla" nil nil)
-                       ("µ" "\\\\(𝜇\\\\)\n" "mu(outside)"
+                       ("𝜇" "\\\\(𝜇\\\\)" "mu-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/mu(outside)" nil nil)
-                       ("minipage" "\\begin{minipage}[${1:htbp}]{${2:1.0}${3:\\linewidth}}\n  $0\n\\end{minipage}" "\\begin{minipage}[position][width] ... \\end{minipage}" nil
-                        ("environments")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/minipage.yasnippet" nil nil)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/mu-(outside)" nil nil)
                        ("matrix" "\\begin{${1:$$(yas/choose-value '(\"pmatrix\" \"bmatrix\" \"Bmatrix\" \"vmatrix\" \"Vmatrix\" \"smallmatrix\"))}} $0 \\end{$1}" "\\begin{matrix} ... \\end{}" nil
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/matrix.yasnippet" nil nil)
@@ -385,12 +452,6 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/lesser lesser" nil nil)
-                       ("leq" "≤" "less or equal"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/less or equal" nil nil)
                        ("lem" "\\begin{lemma}{$1}{$2}\n$0\n\\end{lemma}" "lemma" nil nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/lemma" nil nil)
                        ("lapla" "\\\\laplacian" "laplacian"
                         (and
@@ -398,12 +459,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/laplacian" nil nil)
-                       ("ł" "\\\\(𝜆\\\\)" "lambda(outside)"
+                       ("𝜆" "\\\\(𝜆\\\\)" "lambda-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/lambda(outside)" nil nil)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/lambda-(outside)" nil nil)
                        ("lab" "\\label{${1:label$(unless yas/modified-p (reftex-label nil 'dont-insert))}}$0\n" "\\label" nil
                         ("references")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/label.yasnippet" nil nil)
@@ -426,12 +488,12 @@
                        ("it" "\\item $0" "\\item" nil
                         ("environments")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/it.yasnippet" nil nil)
-                       ("inv" "^{-1}" "inverse"
+                       ("𝜄" "\\\\(𝜄\\\\)" "iota-(outside)"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/inverse" nil nil)
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/iota-(outside)" nil nil)
                        ("intert" "\\\\intertext{$1}\n$0" "intertext"
                         (and
                          (texmathp)
@@ -453,6 +515,19 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/integrals" nil nil)
+                       ("inti" "∫" "integral"
+                        (and
+                         (texmathp)
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/int" nil nil)
+                       ("∞" "\\\\(∞\\\\)" "infinity-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/infinity-(outside)" nil nil)
                        ("inf" "\\\\inf_{$1 ∈ $2} $0" "infimum"
                         (and
                          (texmathp)
@@ -460,12 +535,6 @@
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/infimum" nil nil)
                        ("ig" "\\includegraphics[width=${1:\\linewidth}]{`(call-interactively 'cdlatex-insert-filename)`}" "includegraphics" nil nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/includegraphics" nil nil)
-                       ("ini" "∈" "in"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/in" nil nil)
                        ("⟹" "\\\\(⟹\\\\)" "implies-(outside)"
                         (and
                          (not
@@ -473,17 +542,6 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/implies-(outside)" nil nil)
-                       ("<=" "\\\\impliedby $0" "implied by"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/implied by" nil nil)
-                       ("iff" "\\\\(\\iff\\\\)" "iff-symbol-outside"
-                        (not
-                         (texmathp))
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/iff-symbol-outside" nil nil)
                        ("iff" "\\iff" "if and only if"
                         (and
                          (texmathp)
@@ -493,12 +551,13 @@
                        ("href" "\\href{${1:url}}{${2:text}}$0" "\\href{url}{text}" nil
                         ("environments")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/href.yasnippet" nil nil)
-                       ("embed" "↪" "hookrightarrow"
+                       ("ℏ" "\\\\(ℏ\\\\)" "hbar-(outside)"
                         (and
-                         (texmathp)
+                         (not
+                          (texmathp))
                          'auto)
                         ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/hookrightarrow" nil nil)
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/hbar-(outside)" nil nil)
                        ("̂"
                         (progn
                           (call-interactively #'lb-hat))
@@ -509,37 +568,29 @@
                         nil
                         ((argument 't))
                         "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/hat-unicode" nil nil)
-                       ("hat"
-                        (progn
-                          (call-interactively #'lb-hat))
-                        "hat"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        ((argument 't))
-                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/hat" nil nil)
-                       ("geq" "≥" "greater or equal"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/greater or equal" nil nil)
                        (">>" "≫" "greater greater"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/greater greater" nil nil)
-                       ("frame" "\\begin{frame}{${1:Frame Title$(capitalize yas-text)}}\n$0\n\\end{frame}\n" "\\begin{frame} ... \\end{frame}" nil
-                        ("environments")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/frame.yasnippet" nil nil)
-                       ("AA" "\\\\(∀\\\\)" "forall(outside)"
+                       ("𝛾" "\\\\(𝛾\\\\)" "gamma-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/forall(outside)" nil nil)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/gamma-(outside)" nil nil)
+                       ("frame" "\\begin{frame}{${1:Frame Title$(capitalize yas-text)}}\n$0\n\\end{frame}\n" "\\begin{frame} ... \\end{frame}" nil
+                        ("environments")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/frame.yasnippet" nil nil)
+                       ("∀" "\\\\(∀\\\\)" "forall-symbol-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/forall-symbol-(outside)" nil nil)
                        ("floor" "\\\\left\\\\lfloor $1 \\\\right\\\\rfloor $0" "floor function"
                         (and
                          (texmathp)
@@ -562,13 +613,12 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/exp" nil nil)
-                       ("EE" "\\\\(∃\\\\)" "exists-EE-outside"
+                       ("∃" "\\\\(∃\\\\)" "exists-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/exists-EE-outside" nil nil)
+                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/exists-(outside)" nil nil)
                        ("exa" "\\begin{example}{$1}{}\n$0\n\\end{example}" "example" nil nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/example" nil nil)
                        ("eval" "\\\\eval_{$1} $0" "eval"
                         (and
@@ -576,6 +626,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/eval" nil nil)
+                       ("⟺" "\\\\(⟺\\\\)" "equivalence-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/equivalence-(outside)" nil nil)
                        ("eqv" "≡" "equiv"
                         (and
                          (texmathp)
@@ -584,23 +641,32 @@
                        ("eqs" "\\begin{${1:$$(yas/choose-value '(\"align\" \"align*\" \"multline\" \"gather\" \"subequations\"))}}\n\\label{${2:\"waiting for reftex-label call...\"$(unless yas/modified-p (reftex-label nil 'dont-insert))}}\n$0\n\\end{$1}\n" "\\begin{types of equations} ... \\end{types of equations}" nil
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/eqs.yasnippet" nil nil)
+                       ("𝜓" "\\\\(𝜓\\\\)" "psi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/epsilon-(outside)" nil nil)
+                       ("3v" "\\\\dreivector{$0}{}{}" "dreivector"
+                        (texmathp)
+                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/dreivector" nil nil)
                        ("..." "\\\\dots$0" "dots"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/dots" nil nil)
-                       ("doo"
+                       ("̇"
                         (progn
-                          (progn
-                            (call-interactively #'lb-dot)))
-                        "dot"
+                          (call-interactively #'lb-dot))
+                        "dot-unicode"
                         (and
                          (texmathp)
                          'auto)
                         nil
                         ((argument 't))
-                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/dot" nil nil)
+                        "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/dot-unicode" nil nil)
                        ("dom" "𝒟" "domain"
                         (and
                          (texmathp)
@@ -613,6 +679,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/det" nil nil)
+                       ("𝛿" "\\\\(𝛿\\\\)" "delta-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/delta-(outside)" nil nil)
                        ("def" "\\begin{definition}{$1}{$2}\n$0\n\\end{definition}" "definition" nil nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/definition" nil nil)
                        ("dint" "∫_{${1:-∞}}^{${2:∞}}$0" "definite integral"
                         (and
@@ -694,11 +767,13 @@
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/coprod.yasnippet" nil nil)
                        ("cont" "↯" "contradiction-symbol" nil nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/contradiction-symbol" nil nil)
-                       ("cong" "≅" "cong (isomorphic symbol)"
+                       ("ℂ" "\\\\(ℂ\\\\)" "complex-numbers-symbol-(outside)"
                         (and
-                         (texmathp)
+                         (not
+                          (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/cong-(isomorphic-symbol)" nil nil)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/complex-numbers-symbol-(outside)" nil nil)
                        ("conj" "\\\\conj $0" "complex conjugate"
                         (and
                          (texmathp)
@@ -743,12 +818,6 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/cases" nil nil)
-                       ("cap" "∩" "cap"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/cap" nil nil)
                        ("boxed" "\\\\boxed{$1}$0" "boxed"
                         (and
                          (texmathp)
@@ -769,6 +838,13 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/bigfun" nil nil)
+                       ("𝜂" "\\\\(𝜂\\\\)" "eta-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/beta-(outside)" nil nil)
                        ("bar"
                         (progn
                           (call-interactively #'lb-overline))
@@ -848,24 +924,19 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/abs(olute-value)" nil nil)
-                       ("cb" "^{3}$0" "^{3}"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/^3" nil nil)
-                       ("sr" "^{2}$0" "^2"
-                        (and
-                         (texmathp)
-                         'auto)
-                        ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/^2" nil nil)
                        ("BB" "ℬ" "\\mathcal{B}"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/\\mathcal{B}" nil nil)
+                       ("𝛯" "\\\\(𝛯\\\\)" "Xi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Xi-(outside)" nil nil)
                        ("td" "^{$1}" "to the power"
                         (and
                          (texmathp)
@@ -882,12 +953,40 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Theta" nil nil)
+                       ("𝛴" "\\\\(𝛴\\\\)" "Sigma-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Sigma-(outside)" nil nil)
                        ("SS" "𝒮" "SS-script-S"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/SS-script-S" nil nil)
+                       ("𝛹" "\\\\(𝛹\\\\)" "Psi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Psi-(outside)" nil nil)
+                       ("𝛱" "\\\\(𝛱\\\\)" "Pi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Pi-(outside)" nil nil)
+                       ("𝛷" "\\\\(𝛷\\\\)" "Phi-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Phi-(outside)" nil nil)
                        ("ª" "\\\\(𝛷\\\\)" "Phi(outside)"
                         (and
                          (not
@@ -900,18 +999,26 @@
                          'auto)
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/PP" nil nil)
-                       ("Ø" "\\\\(𝛺\\\\)" "Omega(outside)"
+                       ("𝛺" "\\\\(𝛺\\\\)" "Omega-(outside)"
                         (and
                          (not
                           (texmathp))
                          'auto)
-                        nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Omega(outside)" nil nil)
-                       ("Ø" "𝛺" "Omega"
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Omega-(outside)" nil nil)
+                       ("NN" "ℕ" "NN (natural numbers)"
                         (and
                          (texmathp)
                          'auto)
                         ("math")
-                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Omega" nil nil)
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/NN-(natural-numbers)" nil nil)
+                       ("𝛬" "\\\\(𝛬\\\\)" "Lambda-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Lambda-(outside)" nil nil)
                        ("mk" "`(if (eq major-mode 'org-mode) \"\\\\(\" \"\\\\(\")`$0`(if (eq major-mode 'org-mode) \" \\\\)\" \"\\\\)\")`" "Inline Math" nil
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Inline Math" nil nil)
@@ -921,6 +1028,13 @@
                           (texmathp))
                          'auto)
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/HH-(HilbertSpace)-outside" nil nil)
+                       ("𝛤" "\\\\(𝛤\\\\)" "Gamma-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Gamma-(outside)" nil nil)
                        ("/" "`(condition-case nil (save-excursion (backward-sexp) (kill-sexp) (delete-char 1)) (error (setq numerator 'nil)))`\\\\frac{`(if numerator (yank))`}{$1}$0" "Fraction slash"
                         (texmathp)
                         ("math")
@@ -943,6 +1057,13 @@
                          (texmathp))
                         ("math")
                         nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Display Math" nil nil)
+                       ("𝛥" "\\\\(𝛥\\\\)" "Delta-(outside)"
+                        (and
+                         (not
+                          (texmathp))
+                         'auto)
+                        ("math")
+                        nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Delta-(outside)" nil nil)
                        ("DD" "\\\\dd{$1}" "DD (infinitissimal)"
                         (and
                          (texmathp)
@@ -954,7 +1075,7 @@
                          (texmathp)
                          'auto)
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/Brackets" nil nil)
-                       ("Box" "\\\\Box $0" "Box  or D'Alembert"
+                       ("Box" "☐" "Box  or D'Alembert"
                         (and
                          (texmathp)
                          'auto)
@@ -984,4 +1105,4 @@
                         nil nil "/home/leonb/.emacs.d/etc/yasnippet/snippets/latex-mode/!=(overset-equals-with-excamation-mark)" nil nil)))
 
 
-;;; Do not edit! File generated at Sun Jun  4 19:33:50 2023
+;;; Do not edit! File generated at Sun Jun 18 22:56:32 2023

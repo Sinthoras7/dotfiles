@@ -1,5 +1,0 @@
-# key: ℤ
-# name: whole-numbers-symbol-(outside)
-# condition: (and (not (texmathp)) 'auto)
-# --
-\\(ℤ\\)

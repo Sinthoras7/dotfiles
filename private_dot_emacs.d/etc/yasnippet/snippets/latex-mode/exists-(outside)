@@ -1,5 +1,0 @@
-# key: ∃
-# name: exists-(outside)
-# condition: (and (not (texmathp)) 'auto)
-# --
-\\(∃\\)

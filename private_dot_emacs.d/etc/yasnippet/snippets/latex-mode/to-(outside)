@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: to-(outside)
-# key: →
-# condition: (and (not (texmathp)) (quote auto))
-# --
-\\(→\\)

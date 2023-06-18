@@ -1,5 +1,0 @@
-# key: ª
-# name: Phi(outside)
-# condition: (and (not (texmathp)) 'auto)
-# --
-\\(𝛷\\)

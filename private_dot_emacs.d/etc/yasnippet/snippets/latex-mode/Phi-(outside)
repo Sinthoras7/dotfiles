@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: Phi-(outside)
-# key: 𝛷
-# group: math
-# condition: (and (not (texmathp)) 'auto)
-# --
-\\(𝛷\\)
