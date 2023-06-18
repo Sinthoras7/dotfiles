@@ -17,6 +17,7 @@ xkb_symbols "DM" {
     key <FK05> {[F5, F5, U21AA, U21A0]}; // injective arrow, surjective arrow
     key <FK06> {[F6, F6, U21DD, U27F8]}; // rightsquigarrow, impliedby
 
+    key <FK08> {[F8, F8, U0207]}; // nabla
     key <FK10> {[F10, F10, U2080]};
 
     // first row
@@ -74,7 +75,7 @@ xkb_symbols "DM" {
     key <AB03>	{[c, C, U1D712, U02102]};
     key <AB04>	{[v, V, U020D7, U0221E]};
     key <AB05>	{[b, B, U1D6FD, U02202]}; 
-    key <AB06>	{[n, N, U1D708, U02207]};
+    key <AB06>	{[n, N, U1D708, U02115]}; //
     key <AB07>	{[m, M, U1D707, U021A6]};
     key <AB08>	{[comma, semicolon, U221A, U00302]}; // square root, hat
     key <AB09>	{[period, colon, U00305, U00307]}; // overline, dot
