@@ -499,6 +499,13 @@ borderline west={1mm}{0pt}{green}}
 \newcommand{\wh}{\ensuremath{\encircled{𝒲}}}
 %
 
+\newcommand{\dreivector}[3]{\begin{pmatrix} #1 \\ #2\\ #3 \end{pmatrix}}
+\newcommand{\zweivector}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+
+\newcommand{\ZweiKreuzZweiMatrix}[4]{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}
+
+
+
 
 \numberwithin{equation}{section}
 
