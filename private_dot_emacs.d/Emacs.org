@@ -4,16 +4,16 @@
 
 When building this on a new system, one must:
 
-1. Make sure the font fira code is installed (Debian based distros: sudo apt install font-firacode)
+1. Make sure the font fira code is installed (Debian based distros: sudo apt install font-firacode, Fedora: fira-code-fonts)
 2. Run the command: M-x all-the-icons-install-fonts
-3. See Emacs-Client
-4. See IDE
-5. See Spell-Checking: jinx.el
+(3. See Emacs-Client) should have been done by chezmoi, so just make the client the standard application to open text-files
+(4. See IDE should be necessary only when I really use it)
+5. See Spell-Checking: jinx.el (⟹ On Debian or Ubuntu, install the packages libenchant-2-dev and pkg-config. On Fedora or RHEL, install the package enchant2-devel. On Mac, install enchant2 and pkgconfig.)
 
 For Everything Latex-related to Work as expected:
 5. Set the variable "TeX-engine" to "luatex" via the customize-variable-command
-6. Activate searching between pdf and tex code via 'M-x customize-group RET TeX-view RET' and setting it to 'TeX-source-correlate-mode'
-7. Install aspell dictionaries for languages of choice (Ubuntu: 'sudo apt install aspell-de').
+6. Activate searching between pdf and tex code via 'M-x customize-group RET TeX-view RET' and setting it to =TeX-source-correlate-mode=
+7. Install aspell dictionaries for languages of choice (Ubuntu: =sudo apt install aspell-de=), on fedora =sudo dnf install aspell-de= and =sudo dnf install aspell=
 
 
 If errors after package-updating: https://emacs.stackexchange.com/questions/72655/after-updating-my-packages-two-packages-are-not-working-anymore-how-to-solve-t
@@ -357,6 +357,14 @@ To be hones I don't know what this does, but I have found it on the linked site 
       window-divider-default-right-width 1)
 
 (window-divider-mode)
+#+end_src
+
+** yes/no to y/n
+:PROPERTIES:
+:CREATED: [2023-06-24 Sa 21:30]
+:END:
+#+begin_src emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 * Basic UI Configuration
 
@@ -1089,7 +1097,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
           ;; (setq org-agenda-files (directory-files-recursively "~/Sync/Org" "\\.org$"))
 
 
-          ; You can also filter out certain directory from lookup by adding a array filter. Example, filtering out all org files in xxxx/xxx/daily/ directory:
+          ;; You can also filter out certain directory from lookup by adding a array filter. Example, filtering out all org files in xxxx/xxx/daily/ directory:
            (setq org-agenda-files
             (seq-filter (lambda(x) (not (string-match "/Roam/"(file-name-directory x))))
              (directory-files-recursively "~/Sync/Org" "\\.org$")
@@ -1482,43 +1490,43 @@ This method - generating a list and then archiving in reverse (to avoid changes 
 ** Basic Configuration
 #+begin_src emacs-lisp
 
-    (use-package org-roam
-      ;:straight (:files (:defaults "extensions/*"))
-      :init
-      (setq org-roam-v2-ack t)
-      :custom
-      (org-roam-directory "~/Sync/Org/Roam")
-      (org-roam-completion-everywhere t)
+  (use-package org-roam
+    ;:straight (:files (:defaults "extensions/*"))
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/Sync/Org/Roam")
+    (org-roam-completion-everywhere t)
 
 
-      (org-roam-capture-templates
-         '(("d" "default" plain
-            "%?"
-            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-            :unnarrowed t)
-         ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+    (org-roam-capture-templates
+       '(("d" "default" plain
+          "%?"
+          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
           :unnarrowed t)
-         )
-      )
-
-
-      :bind (("C-c r l" . org-roam-buffer-toggle)
-             ("C-c r f" . org-roam-node-find)
-             ("C-c r i" . org-roam-node-insert)
-             ("C-c r I" . lb/org-roam-node-insert-immediate)
-             :map org-mode-map
-             ("C-M-i"    . completion-at-point)
-             :map org-roam-dailies-map
-             ("Y" . org-roam-dailies-capture-yesterday)
-             ("T" . org-roam-dailies-capture-tomorrow)
-            )
-      :bind-keymap
-      ("C-c r d" . org-roam-dailies-map)
-      :config
-      (require 'org-roam-dailies)
-      (org-roam-setup)
+       ;; ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+       ;;  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+       ;;  :unnarrowed t)
+       )
     )
+
+
+    :bind (("C-c r l" . org-roam-buffer-toggle)
+           ("C-c r f" . org-roam-node-find)
+           ("C-c r i" . org-roam-node-insert)
+           ("C-c r I" . lb/org-roam-node-insert-immediate)
+           :map org-mode-map
+           ("C-M-i"    . completion-at-point)
+           :map org-roam-dailies-map
+           ("Y" . org-roam-dailies-capture-yesterday)
+           ("T" . org-roam-dailies-capture-tomorrow)
+          )
+    :bind-keymap
+    ("C-c r d" . org-roam-dailies-map)
+    :config
+    (require 'org-roam-dailies)
+    (org-roam-setup)
+  )
 
 
 
@@ -1624,52 +1632,125 @@ The following snippet sets up a hook for all Org task state changes and then cop
                  (my/org-roam-copy-todo-to-today))))
 #+end_src
 
+* Org-GTD
+:PROPERTIES:
+:CREATED: [2023-06-24 Sa 20:44]
+:END:
+
+#+begin_src emacs-lisp
+  ;; Emacs version 27.2 required by 06.2023
+
+      (use-package org-gtd
+            :straight t
+           ;; (:host github
+           ;;  :repo "Trevoke/org-gtd.el")
+
+           ;; :after org
+           :init
+           (setq org-gtd-update-ack "3.0.0")
+           (setq org-gtd-update-ack "2.1.0")
+           ;; :config
+           ;; (setq org-gtd-directory "~/Sync/org-gtd")
+           ;; (setq org-gtd-archive-location "~/Sync/org-gtd/archive")
+           ;; (setq org-edna-use-inheritance t)
+           ;; (org-edna-mode)
+           :bind
+           (("C-c d c" . org-gtd-capture)
+           ("C-c d e" . org-gtd-engage)
+           ("C-c d p" . org-gtd-process-inbox)
+           ("C-c d n" . org-gtd-show-all-next)
+           ("C-c d s" . org-gtd-show-stuck-projects))
+           :bind
+           (:map org-gtd-clarify-map
+                 ("C-c c" . org-gtd-organize))
+      )
+
+
+   (setq org-gtd-directory "~/Sync/org-gtd")
+   ;; (setq org-gtd-archive-location "~/Sync/org-gtd/archive")
+   (setq org-edna-use-inheritance t)
+   (org-edna-mode)
+
+
+  #+end_src
+#+begin_src emacs-lisp
+
+   (use-package org-gtd-agenda :straight nil)
+   (use-package org-gtd-archive :straight nil)
+   (use-package org-gtd-areas-of-focus :straight nil)
+   (use-package org-gtd-backward-compatibility :straight nil)
+   (use-package org-gtd-calendar :straight nil)
+   (use-package org-gtd-capture :straight nil)
+   (use-package org-gtd-clarify :straight nil)
+   (use-package org-gtd-core :straight nil)
+   (use-package org-gtd-delegate :straight nil)
+   (use-package org-gtd-files :straight nil)
+   (use-package org-gtd-habit :straight nil)
+   (use-package org-gtd-horizons :straight nil)
+   (use-package org-gtd-id :straight nil)
+   (use-package org-gtd-incubate :straight nil)
+   (use-package org-gtd-knowledge :straight nil)
+   (use-package org-gtd-mode :straight nil)
+   (use-package org-gtd-oops :straight nil)
+   (use-package org-gtd-organize :straight nil)
+   (use-package org-gtd-process :straight nil)
+   (use-package org-gtd-projects :straight nil)
+   (use-package org-gtd-quick-action :straight nil)
+   (use-package org-gtd-refile :straight nil)
+   (use-package org-gtd-review :straight nil)
+   (use-package org-gtd-single-action :straight nil)
+   (use-package org-gtd-skip :straight nil)
+   (use-package org-gtd-trash :straight nil)
+   (use-package org-gtd-upgrades :straight nil)
+#+end_src
+
+
 * Development
 ** Projectile (Disabled) Maybe project.el instead?
 
-[[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
+    [[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
-  ;; (use-package projectile
-  ;;   :diminish projectile-mode
-  ;;   :config (projectile-mode)
-  ;;   :custom ((projectile-completion-system 'ivy))
-  ;;   :bind-keymap
-  ;;   ("C-c p" . projectile-command-map)
-  ;;   :init
-  ;;   ;; NOTE: Set this to the folder where you keep your Git repos!
-  ;;   (when (file-directory-p "~/Projects/Code")
-  ;;   ; If I have a folder, with the Path ~/Projects/Code, then when you list them with projectile you can see all of them 
-  ;;     (setq projectile-project-search-path '("~/Projects/Code"))
-  ;;   )
-  ;;   (setq projectile-switch-project-action #'projectile-dired)) ; When you switch through projects the first thing that opens up is dired
+      ;; (use-package projectile
+      ;;   :diminish projectile-mode
+      ;;   :config (projectile-mode)
+      ;;   :custom ((projectile-completion-system 'ivy))
+      ;;   :bind-keymap
+      ;;   ("C-c p" . projectile-command-map)
+      ;;   :init
+      ;;   ;; NOTE: Set this to the folder where you keep your Git repos!
+      ;;   (when (file-directory-p "~/Projects/Code")
+      ;;   ; If I have a folder, with the Path ~/Projects/Code, then when you list them with projectile you can see all of them
+      ;;     (setq projectile-project-search-path '("~/Projects/Code"))
+      ;;   )
+      ;;   (setq projectile-switch-project-action #'projectile-dired)) ; When you switch through projects the first thing that opens up is dired
 
-  ;; (use-package counsel-projectile
-  ;;   :config (counsel-projectile-mode))
+      ;; (use-package counsel-projectile
+      ;;   :config (counsel-projectile-mode))
 
-#+end_src
+  #+end_src
 
 ** Magit
 
-[[https://magit.vc/][Magit]] is the best Git interface I've ever used.  Common Git operations are easy to execute quickly using Magit's command panel system.
+    [[https://magit.vc/][Magit]] is the best Git interface I've ever used.  Common Git operations are easy to execute quickly using Magit's command panel system.
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
 
-  (use-package magit
-    :commands magit-status
-    ;:custom
-    ;(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-    ;; When magit does a diff, now it is just in 1 window instead of 2. Put this in, when you think this is usefull
-    )
+      (use-package magit
+        :commands magit-status
+        ;:custom
+        ;(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+        ;; When magit does a diff, now it is just in 1 window instead of 2. Put this in, when you think this is usefull
+        )
 
-  ;; NOTE: Make sure to configure a GitHub token before using this package!
-  ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
-  ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
-  (use-package forge
-      :after magit)
+      ;; NOTE: Make sure to configure a GitHub token before using this package!
+      ;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
+      ;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
+      (use-package forge
+          :after magit)
 
-#+end_src
+  #+end_src
 
 * Latex - AUCTEX
 ** Installation and configuration:
