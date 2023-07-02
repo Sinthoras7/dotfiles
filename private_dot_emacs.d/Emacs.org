@@ -1085,7 +1085,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
           (visual-line-mode 1))
 
         (use-package org
-          :commands (org-agenda org -capture)
+          :commands (org-agenda org-capture)
           :hook (org-mode . lb/org-mode-setup)
           :config
           (setq org-ellipsis " ▾")
@@ -1132,7 +1132,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
 
 
       ;; Save Org buffers after refiling!
-      (advice-add 'org-refile :after 'org-save-all-org-buffers)
+      ;; (advice-add 'org-refile :after 'org-save-all-org-buffers)
+      ;; According to this issue https://github.com/Trevoke/org-gtd.el/issues/178 this is causing my error with org-gtd.
 
       ;(setq org-archive-location '(("~/Sync/Org/5-archive.org" )))
 
