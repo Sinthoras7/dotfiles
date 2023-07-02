@@ -1,0 +1,13 @@
+[user]
+	name = Sinthoras7
+	email = 74365287+Sinthoras7@users.noreply.github.com
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
+	credentialStore = gpg
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
