@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: cb
+# key: cb
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+³

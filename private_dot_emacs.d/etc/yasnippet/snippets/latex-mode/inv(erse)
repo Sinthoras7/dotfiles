@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: inv(erse)
+# key: inv
+# group: math
+# condition: (and (texmathp) 'auto)
+# --
+⁻¹
