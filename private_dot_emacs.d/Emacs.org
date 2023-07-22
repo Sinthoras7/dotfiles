@@ -1491,46 +1491,47 @@ This method - generating a list and then archiving in reverse (to avoid changes 
 ** Basic Configuration
 #+begin_src emacs-lisp
 
-  (use-package org-roam
-    ;:straight (:files (:defaults "extensions/*"))
-    :init
-    (setq org-roam-v2-ack t)
-    :custom
-    (org-roam-directory "~/Sync/Org/Roam")
-    (org-roam-completion-everywhere t)
+    (use-package org-roam
+      ;:straight (:files (:defaults "extensions/*"))
+      :init
+      (setq org-roam-v2-ack t)
+      :custom
+      (org-roam-directory "~/Sync/Org/Roam")
+      (org-roam-completion-everywhere t)
 
 
-    (org-roam-capture-templates
-       '(("d" "default" plain
-          "%?"
-          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-          :unnarrowed t)
-       ;; ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-       ;;  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
-       ;;  :unnarrowed t)
-       )
+      (org-roam-capture-templates
+         '(("d" "default" plain
+            "%?"
+            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+            :unnarrowed t)
+         ;; ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+         ;;  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+         ;;  :unnarrowed t)
+         )
+      )
+
+
+      :bind (("C-c r l" . org-roam-buffer-toggle)
+             ("C-c r f" . org-roam-node-find)
+             ("C-c r i" . org-roam-node-insert)
+             ("C-c r I" . lb/org-roam-node-insert-immediate)
+             :map org-mode-map
+             ("C-M-i"    . completion-at-point)
+             :map org-roam-dailies-map
+             ("Y" . org-roam-dailies-capture-yesterday)
+             ("T" . org-roam-dailies-capture-tomorrow)
+            )
+      :bind-keymap
+      ("C-c r d" . org-roam-dailies-map)
+      :config
+      (require 'org-roam-dailies)
+      (org-roam-setup)
     )
 
 
-    :bind (("C-c r l" . org-roam-buffer-toggle)
-           ("C-c r f" . org-roam-node-find)
-           ("C-c r i" . org-roam-node-insert)
-           ("C-c r I" . lb/org-roam-node-insert-immediate)
-           :map org-mode-map
-           ("C-M-i"    . completion-at-point)
-           :map org-roam-dailies-map
-           ("Y" . org-roam-dailies-capture-yesterday)
-           ("T" . org-roam-dailies-capture-tomorrow)
-          )
-    :bind-keymap
-    ("C-c r d" . org-roam-dailies-map)
-    :config
-    (require 'org-roam-dailies)
-    (org-roam-setup)
-  )
 
-
-
+    (use-package org-roam-dailies :straight nil)
 
 
 #+end_src
@@ -1608,29 +1609,29 @@ We can do this by adding some custom code!
 The following snippet sets up a hook for all Org task state changes and then copies the completed (DONE) entry to today's note file:
 
 #+begin_src emacs-lisp
-(defun my/org-roam-copy-todo-to-today ()
-  (interactive)
-  (let ((org-refile-keep t) ;; Set this to nil to delete the original!
-        (org-roam-dailies-capture-templates
-          '(("t" "tasks" entry "%?"
-             :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
-        (org-after-refile-insert-hook #'save-buffer)
-        today-file
-        pos)
-    (save-window-excursion
-      (org-roam-dailies--capture (current-time) t)
-      (setq today-file (buffer-file-name))
-      (setq pos (point)))
+  (defun my/org-roam-copy-todo-to-today ()
+    (interactive)
+    (let ((org-refile-keep t) ;; Set this to nil to delete the original!
+          (org-roam-dailies-capture-templates
+            '(("t" "tasks" entry "%?"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
+          (org-after-refile-insert-hook #'save-buffer)
+          today-file
+          pos)
+      (save-window-excursion
+        (org-roam-dailies--capture (current-time) t)
+        (setq today-file (buffer-file-name))
+        (setq pos (point)))
 
-    ;; Only refile if the target file is different than the current file
-    (unless (equal (file-truename today-file)
-                   (file-truename (buffer-file-name)))
-      (org-refile nil nil (list "Tasks" today-file nil pos)))))
+      ;; Only refile if the target file is different than the current file
+      (unless (equal (file-truename today-file)
+                     (file-truename (buffer-file-name)))
+        (org-refile nil nil (list "Tasks" today-file nil pos)))))
 
-(add-to-list 'org-after-todo-state-change-hook
-             (lambda ()
-               (when (equal org-state "DONE")
-                 (my/org-roam-copy-todo-to-today))))
+  ;; (add-to-list 'org-after-todo-state-change-hook
+  ;;              (lambda ()
+  ;;                (when (equal org-state "DONE")
+  ;;                  (my/org-roam-copy-todo-to-today))))
 #+end_src
 
 * Org-GTD
@@ -2047,10 +2048,16 @@ https://karthinks.com/software/latex-input-for-impatient-scholars/
 
 #+begin_src emacs-lisp
     (use-package cdlatex
+      :straight (:host github
+                :repo "cdominik/cdlatex"
+                :branch "master"
+                )
       ;:ensure t
       :hook (LaTeX-mode . turn-on-cdlatex)
       :bind (:map cdlatex-mode-map
-                  ("<tab>" . cdlatex-tab)))
+                  ("<tab>" . cdlatex-tab))
+    )
+
      (setq cdlatex-math-modify-prefix "#")
 
 
@@ -2147,6 +2154,8 @@ New Snippet-Template
   (setq cdlatex-math-modify-alist
      '(
        ( ?o   "\\interior"               nil        t   t   nil )
+       ( ?F   "\\mathfrak"               nil        t   nil nil )
+       ( ?s   "\\mathscr"                nil        t   nil nil )
       )
      )
 
