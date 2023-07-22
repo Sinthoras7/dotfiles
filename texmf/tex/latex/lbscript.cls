@@ -92,7 +92,7 @@
 \setmathfont{Latin Modern Math}
 \setmathfont{stix}[range={\setminus, \downzigzagarrow}]
 \setmathfont{TeX Gyre Pagella Math}[range={"1D538-"1D56B, "02102, "0210D, "02115, "02119, "0211A, "0211D, "02124}] % The double stroke letters, e.g. for the complex, real, natural, whole numbers, or fields, because they look best in this font.
-
+\setmathfont[range={\mathscr,\mathbfscr}]{XITS Math}
 
 
 
@@ -370,6 +370,7 @@ sorting=none]{biblatex}
     coltitle=black, fonttitle=\bfseries,
   }}
 
+\newtcolorbox{hervor}[1]{mytheoremstyle, title=#1}
 
 \ifbool{lbscript@english}{
     \newtcbtheorem[number within=section, list inside=thmlist, crefname={Theorem}{Theorems}]{theorem}{Theorem}{mytheoremstyle, separator sign={}, description delimiters parenthesis}{th}
