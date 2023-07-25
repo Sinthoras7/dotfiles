@@ -1134,7 +1134,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
       ;; Save Org buffers after refiling!
       ;; (advice-add 'org-refile :after 'org-save-all-org-buffers)
       ;; According to this issue https://github.com/Trevoke/org-gtd.el/issues/178 this is causing my error with org-gtd.
-
+         (advice-add 'org-refile :after #'(lambda (&rest _) (org-save-all-org-buffers))) ;; This should fix the error and is better
       ;(setq org-archive-location '(("~/Sync/Org/5-archive.org" )))
 
 
