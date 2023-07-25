@@ -657,7 +657,7 @@
         (visual-line-mode 1))
 
       (use-package org
-        :commands (org-agenda org -capture)
+        :commands (org-agenda org-capture)
         :hook (org-mode . lb/org-mode-setup)
         :config
         (setq org-ellipsis " ▾")
@@ -704,8 +704,9 @@
 
 
     ;; Save Org buffers after refiling!
-    (advice-add 'org-refile :after 'org-save-all-org-buffers)
-
+    ;; (advice-add 'org-refile :after 'org-save-all-org-buffers)
+    ;; According to this issue https://github.com/Trevoke/org-gtd.el/issues/178 this is causing my error with org-gtd.
+       (advice-add 'org-refile :after #'(lambda (&rest _) (org-save-all-org-buffers))) ;; This should fix the error and is better
     ;(setq org-archive-location '(("~/Sync/Org/5-archive.org" )))
 
 
@@ -1014,6 +1015,10 @@ but only in org-items, not in org-item-checkboxes."
   (org-roam-setup)
 )
 
+
+
+(use-package org-roam-dailies :straight nil)
+
 (setq org-roam-dailies-directory "daily/")
 
 (setq org-roam-dailies-capture-templates
@@ -1085,10 +1090,10 @@ but only in org-items, not in org-item-checkboxes."
                    (file-truename (buffer-file-name)))
       (org-refile nil nil (list "Tasks" today-file nil pos)))))
 
-(add-to-list 'org-after-todo-state-change-hook
-             (lambda ()
-               (when (equal org-state "DONE")
-                 (my/org-roam-copy-todo-to-today))))
+;; (add-to-list 'org-after-todo-state-change-hook
+;;              (lambda ()
+;;                (when (equal org-state "DONE")
+;;                  (my/org-roam-copy-todo-to-today))))
 
 ;; Emacs version 27.2 required by 06.2023
 
@@ -1363,10 +1368,16 @@ but only in org-items, not in org-item-checkboxes."
   (setq LaTeX-babel-hyphen nil) ; Disable language-specific hyphen insertion.
 
 (use-package cdlatex
+    :straight (:host github
+              :repo "cdominik/cdlatex"
+              :branch "master"
+              )
     ;:ensure t
     :hook (LaTeX-mode . turn-on-cdlatex)
     :bind (:map cdlatex-mode-map
-                ("<tab>" . cdlatex-tab)))
+                ("<tab>" . cdlatex-tab))
+  )
+
    (setq cdlatex-math-modify-prefix "#")
 
 
@@ -1452,6 +1463,8 @@ but only in org-items, not in org-item-checkboxes."
 (setq cdlatex-math-modify-alist
    '(
      ( ?o   "\\interior"               nil        t   t   nil )
+     ( ?F   "\\mathfrak"               nil        t   nil nil )
+     ( ?s   "\\mathscr"                nil        t   nil nil )
     )
    )
 
